@@ -1,4 +1,8 @@
 
-pub fn add_two(a: i32) -> i32 {
-    a + 2
+use std::fmt::Debug;
+
+pub fn insertion_sort<T: Debug>(array: &[T]) /*-> &[T]*/ {
+    for elem in array {
+        println!("    simplesorts::insertion_sort():  {:?}", elem);
+    }
 }

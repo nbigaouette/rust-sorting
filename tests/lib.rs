@@ -2,5 +2,9 @@ extern crate sorting;
 
 #[test]
 fn it_works() {
-    assert_eq!(4, sorting::simplesorts::add_two(2));
+    // let array: Vec<_> = vec![5, 4, 7, 2, 4, 9];
+    let array: Vec<_> = vec![5.2, 4.3, 7.4, 2.3, 4.1, 9.0];
+    println!("it_works()...");
+    sorting::simplesorts::insertion_sort(&array);
+    println!("it_works() done!");
 }
