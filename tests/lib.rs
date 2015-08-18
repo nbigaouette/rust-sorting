@@ -60,6 +60,20 @@ fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
 }
 
 
+fn test_sort_vec_float<T: PartialOrd>(to_sort: &Vec<T>, expected_indices: &Vec<usize>,
+                                      sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
+    let sorted_indices = sorting_fct(&to_sort);
+
+    verify_sorting(&to_sort, &sorted_indices);
+
+    assert_eq!(sorted_indices.len(), expected_indices.len());
+
+    for i in 0..to_sort.len() {
+        assert_eq!(sorted_indices[i], expected_indices[i]);
+    }
+}
+
+
 
 /// Validate against empty vector (i8).
 #[test]
@@ -106,15 +120,26 @@ fn simple_insertion_empty_vec_u64() {
 
 
 
-/// Validate a vector of double precision values.
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn simple_insertion_vec_f32() {
+    let to_sort: Vec<f32> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
+                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
+
+    let known_sorted_indices = vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+
+    test_sort_vec_float::<f32>(&to_sort, &known_sorted_indices,
+                               sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
 #[test]
 fn simple_insertion_vec_f64() {
     let to_sort: Vec<f64> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
                                  3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
 
-    let sorted_indices = sorting::simplesorts::insertion::sort(&to_sort);
+    let known_sorted_indices = vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
 
-    verify_sorting(&to_sort, &sorted_indices);
-
-    assert_eq!(sorted_indices, vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12]);
+    test_sort_vec_float::<f64>(&to_sort, &known_sorted_indices,
+                               sorting::simplesorts::insertion::sort);
 }
