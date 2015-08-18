@@ -42,7 +42,7 @@ fn simple_insertion_multiple_sizes_f64() {
     let to_sort: Vec<f64> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
                                  3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
 
-    let sorted_indices = sorting::simplesorts::insertion_sort::sort(&to_sort);
+    let sorted_indices = sorting::simplesorts::insertion::sort(&to_sort);
 
     verify_sorting(&to_sort, &sorted_indices);
 }

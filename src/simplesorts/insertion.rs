@@ -31,7 +31,7 @@ use std::fmt::Debug;
 ///
 /// ```
 /// let data: Vec<i32> = vec![4, 2, 3, 1];
-/// assert_eq!(vec![3, 1, 2, 0], sorting::simplesorts::insertion_sort::sort(&data));
+/// assert_eq!(vec![3, 1, 2, 0], sorting::simplesorts::insertion::sort(&data));
 /// ```
 ///
 pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
