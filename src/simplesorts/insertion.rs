@@ -4,8 +4,6 @@
 //!
 //! Source: https://en.wikipedia.org/wiki/Insertion_sort
 
-use std::fmt::Debug;
-
 
 /// Simple sort: insertion sort.
 ///
@@ -50,7 +48,7 @@ use std::fmt::Debug;
 /// assert_eq!(vec![3, 1, 2, 0], sorting::simplesorts::insertion::sort(&data));
 /// ```
 ///
-pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
+pub fn sort<T: PartialOrd>(input: &Vec<T>) -> Vec<usize> {
     let n = input.len();
 
     // Declare the vector of indices to return. Reserve memory for "n" element so it
