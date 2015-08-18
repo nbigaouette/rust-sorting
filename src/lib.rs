@@ -1,4 +1,4 @@
-//! Sorting algorithms implementation in Rust (1.2).
+//! Sorting algorithms implementations in Rust (1.2).
 //!
 //! # Goal
 //!
@@ -54,7 +54,7 @@
 //! # License
 //! This code is distributed under the terms of the BSD 3-clause "New" or "Revised" License
 //! and is Copyright 2014 Nicolas Bigaouette.
-//!  
+//!
 //!
 
 pub mod simplesorts;

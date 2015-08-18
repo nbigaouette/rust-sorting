@@ -1,4 +1,4 @@
-Sorting algorithms implementation in Rust (1.2).
+Sorting algorithms implementations in Rust (1.2).
 
 # Goal
 
