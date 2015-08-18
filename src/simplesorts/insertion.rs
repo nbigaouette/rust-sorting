@@ -31,6 +31,9 @@ use std::fmt::Debug;
 ///
 /// # Notes
 ///
+/// The implementation is 'unstable' as it does not preserve the relative order of items with
+/// equal values. It could be made stable though if required.
+///
 /// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the
 /// compiler knows how to compare the elements and sort them.
 ///
