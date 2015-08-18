@@ -4,7 +4,6 @@ use std::fmt::Debug;
 pub fn insertion_sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> /*&[T]*/ {
     let n = input.len();
 
-    // let mut output_index: Vec<usize> = vec![0];
     let mut output_index: Vec<usize> = Vec::with_capacity(n);
 
     // Place the first element's index (0) as the first element of the output_index vector.
@@ -13,7 +12,6 @@ pub fn insertion_sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> /*&[T
     println!("n = {:?}", n);
     println!("input:        {:?}", input);
     println!("output_index: {:?}", output_index);
-    // println!("  output: {:?}", input[output[0]]);
 
     if n > 1 {
         // Loop over input vector, skipping the first element as it's already inserted as the first
@@ -21,13 +19,6 @@ pub fn insertion_sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> /*&[T
         for (i_start_at_0,elem) in input.iter().skip(1).enumerate() {
             let i = i_start_at_0 + 1;
             println!("  i={:?} Finding where to put element {:?} (i={:?}) in output_index: {:?}", i, elem, i, output_index);
-            // println!("    0. input[i={}] == elem={:?}", i, elem);
-            // println!("    0. output_index: {:?}", output_index);
-
-            // let x: () = *elem;
-
-            // println!("       *output_index.last().unwrap() = {:?}", *output_index.last().unwrap());
-            // println!("       input[*output_index.last().unwrap()] = {:?}", input[*output_index.last().unwrap()]);
 
             // Verify next element if it is smaller
             // If next element is larger than the last stored index, just place that element at
