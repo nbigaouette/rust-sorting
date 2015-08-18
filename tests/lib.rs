@@ -37,6 +37,25 @@ fn verify_sorting<T: Debug + PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<us
     }
 }
 
+
+/// Call the specified sorting function on an empty vector of specific type.
+///
+/// # Details
+///
+/// This function takes as arguments a pointer to a sorting function acting and call
+/// it on an empty vector of type T. The call should succeed and the index vector should
+/// be empty as well.
+///
+/// # Panics
+///
+/// The emptiness of the sorted list is enforced using `assert!()`.
+///
+/// # Examples
+///
+/// ```
+/// test_empty_vec::<i8>(sorting::simplesorts::insertion::sort);
+/// ```
+///
 fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
     let to_sort: Vec<T> = vec![];
     let sorted_indices = sorting_fct(&to_sort);
