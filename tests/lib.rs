@@ -1,7 +1,5 @@
 extern crate sorting;
 
-use std::fmt::Debug;
-
 /// Verify order of input vector as sorted by indices.
 ///
 /// # Details
