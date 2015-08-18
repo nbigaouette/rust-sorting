@@ -2,3 +2,11 @@
 name = "sorting"
 version = "0.1.0"
 authors = ["Nicolas Bigaouette <nbigaouette@gmail.com>"]
+
+description = "Sorting algorithms implementation in Rust."
+homepage = "https://github.com/nbigaouette/rust-sorting"
+repository = "https://github.com/nbigaouette/rust-sorting.git"
+
+keywords = ["sort", "sorting"]
+
+license = "BSD-3-Clause"
