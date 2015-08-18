@@ -46,11 +46,11 @@ pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
 
     let mut output_index: Vec<usize> = Vec::with_capacity(n);
 
-    // Place the first element's index (0) as the first element of the output_index vector.
-    output_index.push(0);
+    if !input.is_empty() {
 
+        // Place the first element's index (0) as the first element of the output_index vector.
+        output_index.push(0);
 
-    if n > 1 {
         // Loop over input vector, skipping the first element as it's already inserted as the first
         // element of output_index.
         for (i_start_at_0,elem) in input.iter().skip(1).enumerate() {
