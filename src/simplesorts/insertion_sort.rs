@@ -4,7 +4,7 @@
 
 use std::fmt::Debug;
 
-pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> /*&[T]*/ {
+pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
     let n = input.len();
 
     let mut output_index: Vec<usize> = Vec::with_capacity(n);
