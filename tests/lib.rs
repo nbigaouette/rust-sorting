@@ -45,8 +45,9 @@ fn simple_insertion_empty() {
 
     let sorted_indices = sorting::simplesorts::insertion::sort(&to_sort);
 
-    assert_eq!(sorted_indices, vec![]);
     verify_sorting(&to_sort, &sorted_indices);
+
+    assert_eq!(sorted_indices, vec![]);
 }
 
 /// Validate a vector of double precision values.
