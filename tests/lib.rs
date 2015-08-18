@@ -28,14 +28,25 @@ fn verify_sorting<T: Debug + PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<us
     let n = array.len();
     assert_eq!(n , sorted_indices.len());
 
-    for i in 0..n-1 {
-        println!("array[sorted_indices[i={:?}]]={:?}   array[sorted_indices[i+1={:?}]]={:?}",
-            i, array[sorted_indices[i]], i+1, array[sorted_indices[i+1]]);
-        assert!(array[sorted_indices[i]] <= array[sorted_indices[i+1]]);
+    if !array.is_empty() {
+        for i in 0..n-1 {
+            println!("array[sorted_indices[i={:?}]]={:?}   array[sorted_indices[i+1={:?}]]={:?}",
+                i, array[sorted_indices[i]], i+1, array[sorted_indices[i+1]]);
+            assert!(array[sorted_indices[i]] <= array[sorted_indices[i+1]]);
+        }
     }
 }
 
 
+#[test]
+fn simple_insertion_empty() {
+    let to_sort: Vec<i32> = vec![];
+
+    let sorted_indices = sorting::simplesorts::insertion::sort(&to_sort);
+
+    assert_eq!(sorted_indices, vec![]);
+    verify_sorting(&to_sort, &sorted_indices);
+}
 
 #[test]
 fn simple_insertion_multiple_sizes_f64() {
