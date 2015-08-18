@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `sorting` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, sorting">
+
+    <title>sorting - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'sorting', ty: 'mod', relpath: '../'};</script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>sorting</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/sorting/lib.rs.html#1-60' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Sorting algorithms implementations in Rust (1.2).</p>
+
+<h1 id="goal" class='section-header'><a
+                           href="#goal">Goal</a></h1>
+<p>The goal of this project is purely educational and contains two aspects.</p>
+
+<p>First is to learn different canonical sorting algorithms and their implementations.
+Starting on Wikipedia&#39;s
+<a href="https://en.wikipedia.org/wiki/Sorting_algorithm">sorting algorithms page</a>
+I read the summary of some of the algorithms described here and tried to implement them without
+looking at the details. I did not research any optimization on them and as such, there might be
+faster (but more complicated) ways of implementing them. I did put some though in the
+implementations as to have efficient and clean implementations without wasting memory.</p>
+
+<p>My second goal is to learn Rust, a new language which I find quite promising. Created at
+Mozilla and developed in the open by a wonderful community, Rust has an initial goal of
+creating a language to replace C++ as the language of choice for Firefox&#39;s rendering engine.</p>
+
+<p>Some of the goals of Rust are:</p>
+
+<ul>
+<li>Memory safety without garbage collection</li>
+<li>Concurrency without data races</li>
+<li>Abstraction without overhead</li>
+<li>Stability without stagnation</li>
+</ul>
+
+<p>For more information on Rust, see:</p>
+
+<ul>
+<li>Rust homepage: <a href="https://www.rust-lang.org/">https://www.rust-lang.org/</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Rust_%28programming_language%29">https://en.wikipedia.org/wiki/Rust_%28programming_language%29</a></li>
+</ul>
+
+<p>The code should be well commented and simple to follow and/or expand. Unit tests are used to
+validate every implementations.</p>
+
+<p>This module is greatly inspired by my C++ templated sorting library located here:
+<a href="https://github.com/nbigaouette/sorting">https://github.com/nbigaouette/sorting</a>.</p>
+
+<h1 id="algorithms" class='section-header'><a
+                           href="#algorithms">Algorithms</a></h1>
+<p>Sorting functions are encapsulated into modules. Implemented algorithms are:</p>
+
+<h2 id="simple-sorts" class='section-header'><a
+                           href="#simple-sorts">Simple sorts</a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion sort</a></li>
+</ul>
+
+<h1 id="usage" class='section-header'><a
+                           href="#usage">Usage</a></h1>
+<h1 id="notes" class='section-header'><a
+                           href="#notes">Notes</a></h1>
+<h1 id="testing-and-validation" class='section-header'><a
+                           href="#testing-and-validation">Testing and validation</a></h1>
+<h1 id="license" class='section-header'><a
+                           href="#license">License</a></h1>
+<p>This code is distributed under the terms of the BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License
+and is Copyright 2014 Nicolas Bigaouette.</p>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='simplesorts/index.html'
+                               title='sorting::simplesorts'>simplesorts</a></td>
+                        <td class='docblock short'>
+                             <p>Simple sorting algorithms.</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "sorting";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
