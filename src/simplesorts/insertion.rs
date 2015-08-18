@@ -49,9 +49,6 @@ pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
     // Place the first element's index (0) as the first element of the output_index vector.
     output_index.push(0);
 
-    println!("n = {:?}", n);
-    println!("input:        {:?}", input);
-    println!("output_index: {:?}", output_index);
 
     if n > 1 {
         // Loop over input vector, skipping the first element as it's already inserted as the first
