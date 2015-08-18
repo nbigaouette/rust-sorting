@@ -1,5 +1,24 @@
 extern crate sorting;
 
+
+const TO_SORT_I8:  [i8;  16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_I16: [i16; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_I32: [i32; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_I64: [i64; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_U8:  [u8;  16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_U16: [u16; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_U32: [u32; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const TO_SORT_U64: [u64; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
+const SORTED_IND_INT:  [usize; 16] = [3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+
+const TO_SORT_F32: [f32; 16] = [6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
+                                3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
+const TO_SORT_F64: [f64; 16] = [6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
+                                3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
+const SORTED_IND_FLOAT: [usize; 16] = [3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+
+
+
 /// Verify order of input vector as sorted by indices.
 ///
 /// # Details
@@ -169,10 +188,8 @@ fn simple_insertion_empty_vec_f64() {
 /// Validate sorting a vector of single precision values (i8).
 #[test]
 fn simple_insertion_vec_i8() {
-    let to_sort: Vec<i8> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<i8>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -180,10 +197,8 @@ fn simple_insertion_vec_i8() {
 /// Validate sorting a vector of single precision values (i16).
 #[test]
 fn simple_insertion_vec_i16() {
-    let to_sort: Vec<i16> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                 3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<i16>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -191,10 +206,8 @@ fn simple_insertion_vec_i16() {
 /// Validate sorting a vector of single precision values (i32).
 #[test]
 fn simple_insertion_vec_i32() {
-    let to_sort: Vec<i32> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                 3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<i32>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -202,10 +215,8 @@ fn simple_insertion_vec_i32() {
 /// Validate sorting a vector of single precision values (i64).
 #[test]
 fn simple_insertion_vec_i64() {
-    let to_sort: Vec<i64> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                 3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<i64>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -214,10 +225,8 @@ fn simple_insertion_vec_i64() {
 /// Validate sorting a vector of single precision values (u8).
 #[test]
 fn simple_insertion_vec_u8() {
-    let to_sort: Vec<u8> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<u8>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -225,10 +234,8 @@ fn simple_insertion_vec_u8() {
 /// Validate sorting a vector of single precision values (u16).
 #[test]
 fn simple_insertion_vec_u16() {
-    let to_sort: Vec<u16> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                 3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<u16>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -236,10 +243,8 @@ fn simple_insertion_vec_u16() {
 /// Validate sorting a vector of single precision values (u32).
 #[test]
 fn simple_insertion_vec_u32() {
-    let to_sort: Vec<u32> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                 3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<u32>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -247,10 +252,8 @@ fn simple_insertion_vec_u32() {
 /// Validate sorting a vector of single precision values (u64).
 #[test]
 fn simple_insertion_vec_u64() {
-    let to_sort: Vec<u64> = vec![6,  5,  3,  1,  2, 4, 10, 7,
-                                 3, 32, 44, 56, 67, 3, 44, 2];
-
-    let known_sorted_indices = vec![3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
 
     test_sort_vec_float::<u64>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -260,10 +263,8 @@ fn simple_insertion_vec_u64() {
 /// Validate sorting a vector of single precision values (f32).
 #[test]
 fn simple_insertion_vec_f32() {
-    let to_sort: Vec<f32> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
-                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
-
-    let known_sorted_indices = vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_FLOAT[..]);
 
     test_sort_vec_float::<f32>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
@@ -272,10 +273,8 @@ fn simple_insertion_vec_f32() {
 /// Validate sorting a vector of double precision values (f64).
 #[test]
 fn simple_insertion_vec_f64() {
-    let to_sort: Vec<f64> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
-                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
-
-    let known_sorted_indices = vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+    let to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
+    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_FLOAT[..]);
 
     test_sort_vec_float::<f64>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
