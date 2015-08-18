@@ -24,14 +24,12 @@ use std::fmt::Debug;
 /// verify_sorting(&data, &sorted_indices);
 /// ```
 ///
-fn verify_sorting<T: Debug + PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<usize>) {
+fn verify_sorting<T: PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<usize>) {
     let n = array.len();
     assert_eq!(n , sorted_indices.len());
 
     if !array.is_empty() {
         for i in 0..n-1 {
-            println!("array[sorted_indices[i={:?}]]={:?}   array[sorted_indices[i+1={:?}]]={:?}",
-                i, array[sorted_indices[i]], i+1, array[sorted_indices[i+1]]);
             assert!(array[sorted_indices[i]] <= array[sorted_indices[i+1]]);
         }
     }
