@@ -14,6 +14,11 @@ use std::fmt::Debug;
 /// Insertion sort is one of the simplest sorting algorithm. Every elements of the list to sort
 /// are picked one at a time and inserted into a the sorted list at the right location.
 ///
+/// This function takes an immutable reference vector of any type and returns a vector of `usize`
+/// of the same length containing the indices of the initial vector sorted.
+///
+/// # Scaling
+///
 /// In the best case scenario, the list is already sorted and the work is simply to append the
 /// element at the end of the list, hence a O(N) scaling.
 ///
@@ -23,9 +28,6 @@ use std::fmt::Debug;
 ///
 /// Insertion sort is still useful as its simplicity (and thus small overhead) makes it ideal for
 /// small vectors.
-///
-/// This function takes an immutable reference vector of any type and returns a vector of `usize`
-/// of the same length containing the indices of the initial vector sorted.
 ///
 /// # Notes
 ///
