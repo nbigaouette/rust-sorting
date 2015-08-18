@@ -6,6 +6,34 @@
 
 use std::fmt::Debug;
 
+
+/// Simple sort: insertion sort.
+///
+/// # Details
+///
+/// Insertion sort is one of the simplest sorting algorithm. Every elements of the list to sort
+/// are picked one at a time and inserted into a the sorted list at the right location.
+///
+/// In the best case scenario, the list is already sorted and the work is simply to append the
+/// element at the end of the list, hence a O(N) scaling.
+///
+/// In the worst case scenario, the list is in reverse order. Hence, every element is compared to
+/// all previous elements already sorted until this new one gets inserted at the beginning of the
+/// sorted list, thus making this case O(N^2).
+///
+/// Insertion sort is still useful as its simplicity (and thus small overhead) makes it ideal for
+/// small vectors.
+///
+/// This function takes an immutable reference vector of any type and returns a vector of `usize`
+/// of the same length containing the indices of the initial vector sorted.
+///
+/// # Examples
+///
+/// ```
+/// let data: Vec<i32> = vec![4, 2, 3, 1];
+/// assert_eq!(vec![3, 1, 2, 0], sorting::simplesorts::insertion_sort::sort(&data));
+/// ```
+///
 pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
     let n = input.len();
 
