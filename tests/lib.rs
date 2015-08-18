@@ -15,6 +15,9 @@ const TO_SORT_F32: [f32; 16] = [6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
 const TO_SORT_F64: [f64; 16] = [6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
+// NOTE: The order is different for the floats because of the fractional parts. For example,
+//       "2.0" comes before "2.4", while in the integer arrays it was "2" vs "2". Since the
+//       algorithms are stable, the floating points vector will get a different sorting sequence.
 const SORTED_IND_FLOAT: [usize; 16] = [3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
 
 
