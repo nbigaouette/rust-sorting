@@ -60,6 +60,32 @@ fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
 }
 
 
+/// Call the specified sorting function on an specific vector of floats and validate the output.
+///
+/// # Details
+///
+/// This function takes as arguments:
+///    1. An immutable vector of floats, to be sorted;
+///    2. An immutable vector of indices as the reference to compare with;
+///    3. A function pointer to be called on the first vector.
+///
+/// # Panics
+///
+/// This calls the function `verify_sorting()` which will assert if the result is not in order.
+/// It also compares the resulting indices with expected values using asserts.
+///
+/// # Examples
+///
+/// ```
+/// let to_sort: Vec<f32> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
+///                              3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
+///
+/// let known_sorted_indices = vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
+///
+/// test_sort_vec_float::<f32>(&to_sort, &known_sorted_indices,
+///                            sorting::simplesorts::insertion::sort);
+/// ```
+///
 fn test_sort_vec_float<T: PartialOrd>(to_sort: &Vec<T>, expected_indices: &Vec<usize>,
                                       sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
     let sorted_indices = sorting_fct(&to_sort);
