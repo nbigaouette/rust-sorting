@@ -47,6 +47,8 @@ use std::fmt::Debug;
 pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
     let n = input.len();
 
+    // Declare the vector of indices to return. Reserve memory for "n" element so it
+    // is the same size as the vector to sort.
     let mut output_index: Vec<usize> = Vec::with_capacity(n);
 
     if !input.is_empty() {
@@ -57,18 +59,18 @@ pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
         // Loop over input vector, skipping the first element as it's already inserted as the first
         // element of output_index.
         for (i_start_at_0,elem) in input.iter().skip(1).enumerate() {
+            // enumerate() returns the current index of iteration, not the index of the
+            // vector iterated upon. This means it will start at 0, even though we wanted to skip
+            // the first element using skip(1). Let's get the value we wanted: 'i', the loop index
+            // of the input array.
             let i = i_start_at_0 + 1;
-            println!("  i={:?} Finding where to put element {:?} (i={:?}) in output_index: {:?}", i, elem, i, output_index);
 
-            // Verify next element if it is smaller
-            // If next element is larger than the last stored index, just place that element at
-            // the end.
+            // Compare the element of the loop 'elem' with the last element stored in the index
+            // vector 'output_index'.
             if *elem >= input[*output_index.last().unwrap()] {
-                // Next element "elem" is already larger than the previous stored index.
-                // Just use its index.
+                // If the element of the loop is larger or equal to the last sorted element, simply
+                // append its index to the sorted index list.
                 output_index.push(i);
-
-                println!("    1. Pushing element '{:?}' at the end.", elem);
             } else {
                 println!("    2. elem ?< input[output_index[0]]");
                 println!("           {:?} ?< {:?}", elem, input[output_index[0]]);
@@ -88,7 +90,6 @@ pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
                         }
                     }
                 }
-                println!("        3. output_index: {:?}", output_index);
             }
 
             print!("           output: [");
