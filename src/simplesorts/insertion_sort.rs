@@ -64,8 +64,10 @@ pub fn sort<T: Debug + PartialOrd>(input: &Vec<T>) -> Vec<usize> {
         }
     }
 
+    println!("");
+    println!("END: input:        {:?}", input);
     println!("END: output_index: {:?}", output_index);
-    print!("END: output: [");
+    print!("END: output:       [");
     for j in output_index.iter() {
             print!("{:?}, ", input[*j]);
     }
