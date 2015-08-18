@@ -29,6 +29,12 @@ use std::fmt::Debug;
 /// Insertion sort is still useful as its simplicity (and thus small overhead) makes it ideal for
 /// small vectors.
 ///
+/// # Optimizations
+///
+/// Every element of the vector to sort are compared to the first and last element of the sorted
+/// vector. This prevents the worst case scenario to happen. The implementation still keeps an
+/// O(N^2) scaling though.
+///
 /// # Notes
 ///
 /// The implementation is 'stable' as it does preserve the relative order of items with
@@ -36,12 +42,6 @@ use std::fmt::Debug;
 ///
 /// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the
 /// compiler knows how to compare the elements and sort them.
-///
-/// # Optimizations
-///
-/// Every element of the vector to sort are compared to the first and last element of the sorted
-/// vector. This prevents the worst case scenario to happen. The implementation still keeps an
-/// O(N^2) scaling though.
 ///
 /// # Examples
 ///
