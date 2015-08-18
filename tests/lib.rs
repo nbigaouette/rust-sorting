@@ -41,6 +41,7 @@ fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
     let to_sort: Vec<T> = vec![];
     let sorted_indices = sorting_fct(&to_sort);
     assert_eq!(sorted_indices, vec![]);
+    assert!(sorted_indices.is_empty());
 }
 
 
