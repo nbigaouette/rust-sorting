@@ -59,4 +59,6 @@ fn simple_insertion_multiple_sizes_f64() {
     let sorted_indices = sorting::simplesorts::insertion::sort(&to_sort);
 
     verify_sorting(&to_sort, &sorted_indices);
+
+    assert_eq!(sorted_indices, vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12]);
 }
