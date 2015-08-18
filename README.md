@@ -47,6 +47,7 @@ Sorting functions are encapsulated into modules. Implemented algorithms are:
 
 # Notes
 
+API documentation can be found on GitHub pages at http://nbigaouette.github.io/rust-sorting/.
 
 # Testing and validation
 
