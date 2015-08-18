@@ -38,6 +38,7 @@ fn verify_sorting<T: Debug + PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<us
 }
 
 
+/// Validate against empty vector.
 #[test]
 fn simple_insertion_empty() {
     let to_sort: Vec<i32> = vec![];
@@ -48,6 +49,7 @@ fn simple_insertion_empty() {
     verify_sorting(&to_sort, &sorted_indices);
 }
 
+/// Validate a vector of double precision values.
 #[test]
 fn simple_insertion_multiple_sizes_f64() {
     let to_sort: Vec<f64> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
