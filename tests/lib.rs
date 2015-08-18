@@ -37,18 +37,58 @@ fn verify_sorting<T: Debug + PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<us
     }
 }
 
-
-/// Validate against empty vector.
-#[test]
-fn simple_insertion_empty() {
-    let to_sort: Vec<i32> = vec![];
-
-    let sorted_indices = sorting::simplesorts::insertion::sort(&to_sort);
-
-    verify_sorting(&to_sort, &sorted_indices);
-
+fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
+    let to_sort: Vec<T> = vec![];
+    let sorted_indices = sorting_fct(&to_sort);
     assert_eq!(sorted_indices, vec![]);
 }
+
+
+
+/// Validate against empty vector (i8).
+#[test]
+fn simple_insertion_empty_vec_i8() {
+    test_empty_vec::<i8>(sorting::simplesorts::insertion::sort);
+}
+/// Validate against empty vector (i32).
+#[test]
+fn simple_insertion_empty_vec_i16() {
+    test_empty_vec::<i16>(sorting::simplesorts::insertion::sort);
+}
+/// Validate against empty vector (i32).
+#[test]
+fn simple_insertion_empty_vec_i32() {
+    test_empty_vec::<i32>(sorting::simplesorts::insertion::sort);
+}
+/// Validate against empty vector (i64).
+#[test]
+fn simple_insertion_empty_vec_i64() {
+    test_empty_vec::<i64>(sorting::simplesorts::insertion::sort);
+}
+
+
+/// Validate against empty vector (u8).
+#[test]
+fn simple_insertion_empty_vec_u8() {
+    test_empty_vec::<u8>(sorting::simplesorts::insertion::sort);
+}
+/// Validate against empty vector (u32).
+#[test]
+fn simple_insertion_empty_vec_u16() {
+    test_empty_vec::<u16>(sorting::simplesorts::insertion::sort);
+}
+/// Validate against empty vector (u32).
+#[test]
+fn simple_insertion_empty_vec_u32() {
+    test_empty_vec::<u32>(sorting::simplesorts::insertion::sort);
+}
+/// Validate against empty vector (u64).
+#[test]
+fn simple_insertion_empty_vec_u64() {
+    test_empty_vec::<u64>(sorting::simplesorts::insertion::sort);
+}
+
+
 
 /// Validate a vector of double precision values.
 #[test]
