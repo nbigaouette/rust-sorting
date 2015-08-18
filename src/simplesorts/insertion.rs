@@ -27,6 +27,11 @@ use std::fmt::Debug;
 /// This function takes an immutable reference vector of any type and returns a vector of `usize`
 /// of the same length containing the indices of the initial vector sorted.
 ///
+/// # Notes
+///
+/// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the
+/// compiler knows how to compare the elements and sort them.
+///
 /// # Examples
 ///
 /// ```
