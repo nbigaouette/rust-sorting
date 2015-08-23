@@ -1,6 +1,6 @@
 //! Insertion sort algorithm.
 //!
-//! The `insertion_sort` module contains the simple sorting algorithm "Insertion Sort".
+//! The `insertion` module contains the simple sorting algorithm "Insertion Sort".
 //!
 //! Source: https://en.wikipedia.org/wiki/Insertion_sort
 
