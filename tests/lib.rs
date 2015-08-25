@@ -315,6 +315,7 @@ fn simple_insertion_vec_f64() {
 }
 
 
+/// Validate sorting of a const vector (i8).
 #[test]
 fn simple_selection_vec_i8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
