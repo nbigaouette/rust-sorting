@@ -11,3 +11,6 @@ readme = "README.md"
 keywords = ["sort", "sorting"]
 
 license = "BSD-3-Clause"
+
+[dependencies]
+rand = "0.3"
