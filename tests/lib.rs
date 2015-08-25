@@ -320,4 +320,6 @@ fn simple_selection_vec_i8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
 
     sorting::simplesorts::selection::sort(&mut to_sort);
+
+    verify_sorted(&to_sort);
 }
