@@ -42,7 +42,7 @@ use std::fmt::Debug;
 /// assert_eq!(vec![1, 2, 3, 4, 5], data);
 /// ```
 ///
-pub fn sort<T: Ord + Debug>(array: &mut Vec<T>) {
+pub fn sort<T: PartialOrd + Debug>(array: &mut Vec<T>) {
     println!("input array:  {:?}", array);
 
     if !array.is_empty() {
