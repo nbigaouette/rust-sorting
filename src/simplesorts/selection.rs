@@ -75,10 +75,10 @@ pub fn sort<T: Ord + Debug>(array: &mut Vec<T>) {
                 //       need to adapt the index as stored in "k.0".
                 if k.1 < &array[i] { i + k.0 + 1 } else { i }
             };
-            println!("            k: {:?}   array[i]={:?}   array[j]={:?}", j, array[i], array[j]);
+            println!("            j: {:?}   array[i]={:?}   array[j]={:?}", j, array[i], array[j]);
 
             array.swap(i, j);
-            println!("   new array: {:?}", array);
+            println!("        new array:    {:?}", array);
         }
     }
 
