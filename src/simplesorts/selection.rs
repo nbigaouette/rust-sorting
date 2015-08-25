@@ -10,13 +10,8 @@ use std::fmt::Debug;
 ///
 /// # Details
 ///
-/// Selection sort is one of the simplest sorting algorithm. The list to sort is split into two
-/// sections; the first with the sorted element (starting empty) and the second with the remaining
-/// element (starting full). At every iteration, the smallest element in the remaining list is
-/// found and placed at the end of the sorted list.
-///
-/// This function takes an immutable reference vector of any type and returns a vector of `usize`
-/// of the same length containing the indices of the initial vector sorted.
+/// Selection sort is one of the simplest sorting algorithm. It sorts a vector in place by
+/// looping over all elements and swapping the smallest element of the rest of the vector.
 ///
 /// # Scaling
 ///
