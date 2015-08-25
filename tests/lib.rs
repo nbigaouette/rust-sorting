@@ -333,14 +333,9 @@ fn simple_selection_vec_i8() {
 /// Validate sorting of a random vector (i8).
 #[test]
 fn simple_selection_rand_vec_i8() {
-    let len = 100;
-    // let mut to_sort: Vec<i8> = Vec::with_capacity(len);
-    // for i in 0..len {
-    //     to_sort.push(rand::thread_rng().gen_range(-49, 51));
-    // }
+    let len = 50;
     let mut to_sort: Vec<i8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i8>>();
     sorting::simplesorts::selection::sort(&mut to_sort);
     verify_sorted(&to_sort);
-
 }
