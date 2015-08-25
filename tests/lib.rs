@@ -22,6 +22,37 @@ const SORTED_IND_FLOAT: [usize; 16] = [3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10,
 
 
 
+
+/// Verify input vector as being sorted.
+///
+/// # Details
+///
+/// This function takes as arguments a vector of data that must be verified to be sorted.
+///
+/// The elements of the sorted vector are compared to the next ones to make sure they are less
+/// or equal.
+///
+/// # Panics
+///
+/// The sorting of the data vector is enforced using `assert!()`.
+///
+/// # Examples
+///
+/// ```
+/// let data: Vec<i32> = vec![1, 2, 3, 4];
+/// verify_sorting(&data);
+/// ```
+///
+fn verify_sorted<T: PartialOrd>(array: &Vec<T>) {
+    let n = array.len();
+    if !array.is_empty() {
+        for i in 0..n-1 {
+            assert!(array[i] <= array[i+1]);
+        }
+    }
+}
+
+
 /// Verify order of input vector as sorted by indices.
 ///
 /// # Details
