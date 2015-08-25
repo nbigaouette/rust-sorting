@@ -508,3 +508,13 @@ fn simple_selection_rand_vec_f64() {
     sorting::simplesorts::selection::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
+
+#[test]
+fn efficient_quicksort_rand_vec_f64() {
+    // unimplemented!()
+    let len = 50;
+    let mut to_sort: Vec<f64> = vec![0.; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
+    sorting::efficientsorts::quick::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
