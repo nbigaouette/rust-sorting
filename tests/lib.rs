@@ -313,3 +313,11 @@ fn simple_insertion_vec_f64() {
     test_sort_vec_float::<f64>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
+
+
+#[test]
+fn simple_selection_vec_i8() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
+
+    sorting::simplesorts::selection::sort(&mut to_sort);
+}
