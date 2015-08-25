@@ -33,5 +33,18 @@
 /// ```
 ///
 pub fn sort<T: PartialOrd>(array: &mut Vec<T>) {
-    unimplemented!();
+    let n = array.len();
+
+    if n <= 1 {
+        return;
+    } else if n == 2 {
+        if array.first() <= array.last() {
+            return;
+        } else {
+            array.swap(0, 1);
+            return;
+        }
+    } else {
+        unimplemented!();
+    }
 }
