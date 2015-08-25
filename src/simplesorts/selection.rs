@@ -83,6 +83,4 @@ pub fn sort<T: Ord + Debug>(array: &mut Vec<T>) {
     }
 
     println!("output array: {:?}", array);
-
-    // panic!("Ok");
 }
