@@ -224,7 +224,7 @@ fn simple_insertion_empty_vec_f64() {
     test_empty_vec::<f64>(sorting::simplesorts::insertion::sort);
 }
 
-/// Validate sorting a vector of single precision values (i8).
+/// Validate sorting of a const vector (i8).
 #[test]
 fn simple_insertion_vec_i8() {
     let to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
@@ -233,7 +233,8 @@ fn simple_insertion_vec_i8() {
     test_sort_vec_float::<i8>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
-/// Validate sorting a vector of single precision values (i16).
+
+/// Validate sorting of a const vector (i16).
 #[test]
 fn simple_insertion_vec_i16() {
     let to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
@@ -242,7 +243,8 @@ fn simple_insertion_vec_i16() {
     test_sort_vec_float::<i16>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
-/// Validate sorting a vector of single precision values (i32).
+
+/// Validate sorting of a const vector (i32).
 #[test]
 fn simple_insertion_vec_i32() {
     let to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
@@ -251,7 +253,8 @@ fn simple_insertion_vec_i32() {
     test_sort_vec_float::<i32>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
-/// Validate sorting a vector of single precision values (i64).
+
+/// Validate sorting of a const vector (i64).
 #[test]
 fn simple_insertion_vec_i64() {
     let to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
@@ -261,7 +264,7 @@ fn simple_insertion_vec_i64() {
                                sorting::simplesorts::insertion::sort);
 }
 
-/// Validate sorting a vector of single precision values (u8).
+/// Validate sorting of a const vector (u8).
 #[test]
 fn simple_insertion_vec_u8() {
     let to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
@@ -270,7 +273,8 @@ fn simple_insertion_vec_u8() {
     test_sort_vec_float::<u8>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
-/// Validate sorting a vector of single precision values (u16).
+
+/// Validate sorting of a const vector (u16).
 #[test]
 fn simple_insertion_vec_u16() {
     let to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
@@ -279,7 +283,8 @@ fn simple_insertion_vec_u16() {
     test_sort_vec_float::<u16>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
-/// Validate sorting a vector of single precision values (u32).
+
+/// Validate sorting of a const vector (u32).
 #[test]
 fn simple_insertion_vec_u32() {
     let to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
@@ -288,7 +293,8 @@ fn simple_insertion_vec_u32() {
     test_sort_vec_float::<u32>(&to_sort, &known_sorted_indices,
                                sorting::simplesorts::insertion::sort);
 }
-/// Validate sorting a vector of single precision values (u64).
+
+/// Validate sorting of a const vector (u64).
 #[test]
 fn simple_insertion_vec_u64() {
     let to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
