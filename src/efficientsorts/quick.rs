@@ -4,6 +4,8 @@
 //!
 //! Source: https://en.wikipedia.org/wiki/Quicksort
 
+extern crate libc;
+
 use std::fmt::Debug;
 
 /// Quicksort

@@ -18,3 +18,4 @@ crate-type = ["dylib", "rlib"]
 
 [dependencies]
 rand = "0.3"
+libc = "0.1.10"
