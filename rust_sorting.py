@@ -18,10 +18,6 @@ rustlib = ctypes.CDLL(libfile)
 
 def quicksort(array):
 
-    # rustlib.ffi_quicksort(
-        # ctypes.c_void_p(array.ctypes.data), len(array), b"i32"
-    # )
-
     ptr = ctypes.c_void_p(array.ctypes.data)
     n   = len(array)
 
