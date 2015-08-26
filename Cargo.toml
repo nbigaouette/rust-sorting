@@ -12,5 +12,9 @@ keywords = ["sort", "sorting"]
 
 license = "BSD-3-Clause"
 
+[lib]
+name = "sorting"
+crate-type = ["dylib", "rlib"]
+
 [dependencies]
 rand = "0.3"
