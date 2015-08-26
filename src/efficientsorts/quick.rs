@@ -115,7 +115,7 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
 }
 
 #[no_mangle]
-pub extern "C" fn rust_quicksort(array_pointer: *const libc::int8_t, n: libc::size_t) {
+pub extern "C" fn ffi_quicksort_i8(array_pointer: *const libc::int8_t, n: libc::size_t) {
     let array = unsafe {
         slice::from_raw_parts(array_pointer as *const i8, n as usize)
     };

@@ -17,4 +17,4 @@ libfile = glob.glob(libpath)[0]
 rustlib = ctypes.CDLL(libfile)
 
 def quicksort(array):
-    rustlib.rust_quicksort(ctypes.c_void_p(array.ctypes.data), len(array))
+    rustlib.ffi_quicksort_i8(ctypes.c_void_p(array.ctypes.data), len(array))
