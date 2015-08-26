@@ -43,3 +43,6 @@ def quicksort(array):
         rustlib.ffi_quicksort_f32(ptr, n)
     elif array.dtype == np.float64:
         rustlib.ffi_quicksort_f64(ptr, n)
+
+    else:
+         raise NotImplementedError
