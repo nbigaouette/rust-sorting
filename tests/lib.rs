@@ -508,3 +508,24 @@ fn simple_selection_rand_vec_f64() {
     sorting::simplesorts::selection::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
+
+#[test]
+fn efficient_quicksort_rand_vec_f64() {
+    // let lens: Vec<usize> = vec![0, 1, 2, 3, 50];
+    let lens: Vec<usize> = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 50, 100];
+    for len in lens {
+        let mut to_sort: Vec<f64> = vec![0.; len];
+        to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
+        sorting::efficientsorts::quick::sort(&mut to_sort);
+        verify_sorted(&to_sort);
+    }
+}
+
+
+/// Validate sorting of a const vector (i8).
+#[test]
+fn efficient_quicksort_vec_i8() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
