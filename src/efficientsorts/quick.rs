@@ -112,3 +112,8 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
         sort(&mut array[pivot+1..n]);
     }
 }
+
+#[no_mangle]
+pub extern "C" fn rust_quicksort(array_pointer: *const libc::int8_t, n: libc::size_t) {
+    unimplemented!();
+}
