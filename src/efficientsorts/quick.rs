@@ -105,7 +105,7 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
             }
         }
 
-        // Recursively call the function of slices of the vector.
+        // Recursively call the function on slices of the vector.
         sort(&mut array[0..pivot+1]);
         sort(&mut array[pivot+1..n]);
     }
