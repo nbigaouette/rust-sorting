@@ -35,20 +35,17 @@ use std::fmt::Debug;
 ///
 // pub fn sort<T: PartialOrd>(array: &mut Vec<T>) {
 pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
+    println!("");
+    println!("##########################################################################");
     let n = array.len();
 
-    println!("");
     println!("  array: {:?}", array);
 
     if n <= 1 {
-        return;
+        // Don't do anything
     } else if n == 2 {
-        if array.first() <= array.last() {
-            return;
-        } else {
+        if array.first() > array.last() {
             array.swap(0, 1);
-            // (array[0], array[1]) = (array[1], array[0]);
-            return;
         }
     } else {
         // Pick a pivot: Pick the middle element by skipping half the length and keeping just one.
@@ -93,6 +90,7 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
             println!("  array[pivot={:?}]: {:?}    array[i={:?}]: {:?}", pivot, array[pivot], i, array[i]);
             if array[pivot] > array[i] {
                 println!("    Swapping array[pivot={:?}]: {:?} with array[i={:?}]: {:?}", pivot, array[pivot], i, array[i]);
+
                 array.swap(pivot, i);
                 println!("  array: {:?}", array);
                 if i == pivot+1 {
@@ -110,6 +108,9 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
         println!("array: {:?}", array);
         println!("array[pivot={:?}] = {:?}", pivot, array[pivot]);
 
-        unimplemented!();
+        sort(&mut array[0..pivot+1]);
+        sort(&mut array[pivot+1..n]);
     }
+
+    println!("FINAL array: {:?}", array);
 }
