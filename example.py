@@ -21,6 +21,9 @@ for dtype in dtypes:
 
     # print("Python:      to sort =", repr(array))
 
+    # rs.sort(array)
+    # rs.insertionsort(array)
+    # rs.selectionsort(array)
     rs.quicksort(array)
 
     # print("Python:      sorted  =", repr(array))
