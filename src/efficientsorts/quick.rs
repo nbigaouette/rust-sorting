@@ -36,7 +36,7 @@ use std::slice;
 /// assert_eq!(vec![1, 2, 3, 4, 5], data);
 /// ```
 ///
-pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
+pub fn sort<T: PartialOrd>(array: &mut [T]) {
     let n = array.len();
 
     if n <= 1 {
