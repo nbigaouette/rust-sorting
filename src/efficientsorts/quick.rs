@@ -35,11 +35,7 @@ use std::fmt::Debug;
 ///
 // pub fn sort<T: PartialOrd>(array: &mut Vec<T>) {
 pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
-    println!("");
-    println!("##########################################################################");
     let n = array.len();
-
-    println!("  array: {:?}", array);
 
     if n <= 1 {
         // Don't do anything
@@ -86,31 +82,18 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
 
         let mut pivot = 0;
         for i in 1..n {
-            println!("---------------");
-            println!("  array[pivot={:?}]: {:?}    array[i={:?}]: {:?}", pivot, array[pivot], i, array[i]);
             if array[pivot] > array[i] {
-                println!("    Swapping array[pivot={:?}]: {:?} with array[i={:?}]: {:?}", pivot, array[pivot], i, array[i]);
 
                 array.swap(pivot, i);
-                println!("  array: {:?}", array);
                 if i == pivot+1 {
                     pivot = i;
-                    println!("      pivot is now at {:?}", pivot);
                 } else {
-                    println!("      swapping i={:?} and pivot+1={:?}", i, pivot+1);
                     array.swap(i, pivot+1);
                     pivot = pivot+1;
-                    println!("        pivot is now at {:?}", pivot);
                 }
             }
-            println!("  array: {:?}", array);
         }
-        println!("array: {:?}", array);
-        println!("array[pivot={:?}] = {:?}", pivot, array[pivot]);
-
         sort(&mut array[0..pivot+1]);
         sort(&mut array[pivot+1..n]);
     }
-
-    println!("FINAL array: {:?}", array);
 }
