@@ -3,6 +3,7 @@
 import ctypes
 import os
 import glob
+import re
 
 import numpy as np
 
@@ -12,8 +13,14 @@ import numpy as np
 target = "debug"
 # target = "release"
 
-libpath = os.path.join("target", target, "libsorting.*")
-libfile = glob.glob(libpath)[0]
+libpath = os.path.join("target", target, "*")
+files = glob.glob(libpath)
+
+p = re.compile("libsorting.(dylib|dll|so)$")
+files = [f for f in files if p.findall(f)]
+assert(len(files) == 1)
+libfile = files[0]
+
 rustlib = ctypes.CDLL(libfile)
 
 def sort(array):
