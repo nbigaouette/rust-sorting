@@ -50,7 +50,8 @@ extern crate libc;
 /// assert_eq!(vec![3, 1, 2, 0], sorting::simplesorts::insertion::sort(&data));
 /// ```
 ///
-pub fn sort<T: PartialOrd+Debug>(input: &mut Vec<T>) {
+// use std::fmt::Debug;
+pub fn sort<T: PartialOrd>(input: &mut Vec<T>) {
     let n = input.len();
 
     println!("Insertion sort  input: {:?}", input);
