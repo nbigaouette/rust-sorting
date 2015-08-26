@@ -15,6 +15,7 @@ repeat = 4
 Nb_power_of_two = 20
 Ns = 2**np.arange(0, Nb_power_of_two)
 
+# fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
 fct_ptrs = [rs.sort, rs.quicksort, rs.selectionsort]
 
 timing = np.zeros((len(fct_ptrs), Nb_power_of_two, repeat), dtype=np.float64)
