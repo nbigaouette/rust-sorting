@@ -4,6 +4,8 @@
 //!
 //! Source: https://en.wikipedia.org/wiki/Insertion_sort
 
+extern crate libc;
+
 
 /// Simple sort: insertion sort.
 ///
@@ -48,56 +50,123 @@
 /// assert_eq!(vec![3, 1, 2, 0], sorting::simplesorts::insertion::sort(&data));
 /// ```
 ///
-pub fn sort<T: PartialOrd>(input: &[T]) -> Vec<usize> {
+pub fn sort<T: PartialOrd+Debug>(input: &mut Vec<T>) {
     let n = input.len();
 
-    // Declare the vector of indices to return. Reserve memory for "n" element so it
-    // is the same size as the vector to sort.
-    let mut output_index: Vec<usize> = Vec::with_capacity(n);
+    println!("Insertion sort  input: {:?}", input);
 
-    if !input.is_empty() {
-
-        // Place the first element's index (0) as the first element of the output_index vector.
-        output_index.push(0);
-
-        // Loop over input vector, skipping the first element as it's already inserted as the first
-        // element of output_index.
-        for (i_start_at_0,elem) in input.iter().skip(1).enumerate() {
-            // enumerate() returns the current index of iteration, not the index of the
-            // vector iterated upon. This means it will start at 0, even though we wanted to skip
-            // the first element using skip(1). Let's get the value we wanted: 'i', the loop index
-            // of the input array.
-            let i = i_start_at_0 + 1;
-
-            // Compare the element of the loop 'elem' with the last element stored in the index
-            // vector 'output_index'.
-            if *elem >= input[*output_index.last().unwrap()] {
-                // If the element of the loop is larger or equal to the last sorted element, simply
-                // append its index to the sorted index list.
-                output_index.push(i);
-            } else if *elem < input[*output_index.first().unwrap()] {
-                // If the element of the loop is smaller than the first sorted element, simply put
-                // it at the beginning of the sorted index list.
-                output_index.insert(0, i);
-            } else {
-                // If the element of the loop is smaller than the last sorted element, we loop
-                // over (backward) all sorted indices and compare the values to identify where
-                // to place the loop element.
-                // NOTE: We must use a loop on indices as to prevent problems with the
-                //       rust borrow-checker.
-
-                // Naively start at the second element of the output_index.
-                for j in (1..i) {
-                    if *elem < input[output_index[j]] {
-                        output_index.insert(j, i);
-                        break;
-                    }
-                }
+    // Start at second element, and insert every elements at the right location
+    for i in 1..n {
+        // Loop back over the already sorted subvector, and insert element "i" at the
+        // proper location.
+        for j in 0..i {
+            // Element "i" is smaller than "j", insert element "i" before "j" and
+            // break the "j" loop.
+            if input[j] > input[i] {
+                // Remove element "i" from vector...
+                let elem = input.remove(i);
+                // ...and place it before element "j".
+                input.insert(j, elem);
+                // NOTE: Elements >i will be moved twice: once when "i" is remove(), and once again
+                //       at the insert().
+                break;
             }
         }
     }
+}
 
-    assert_eq!(output_index.len(), n);
 
-    return output_index;
+
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_i8(array_pointer: *const libc::int8_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut i8, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_i16(array_pointer: *const libc::int16_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut i16, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_i32(array_pointer: *const libc::int32_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut i32, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_i64(array_pointer: *const libc::int64_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut i64, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+
+
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_u8(array_pointer: *const libc::uint8_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut u8, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_u16(array_pointer: *const libc::uint16_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut u16, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_u32(array_pointer: *const libc::uint32_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut u32, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_u64(array_pointer: *const libc::uint64_t, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut u64, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_f32(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut i32, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
+}
+#[no_mangle]
+pub extern "C" fn ffi_insertionsort_f64(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        Vec::from_raw_parts(array_pointer as *mut i64, n as usize, n as usize)
+    };
+    sort(&mut to_sort);
 }
