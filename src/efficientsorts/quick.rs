@@ -123,12 +123,7 @@ pub extern "C" fn ffi_quicksort_i8(array_pointer: *const libc::int8_t, n: libc::
     let mut to_sort = unsafe {
         slice::from_raw_parts_mut(array_pointer as *mut i8, n as usize)
     };
-
-    println!("Rust: n = {:?}        to_sort = {:?}", n, to_sort);
-
     sort(&mut to_sort);
-
-    println!("Rust:         sorted array = {:?}", to_sort);
 }
 #[no_mangle]
 pub extern "C" fn ffi_quicksort_i16(array_pointer: *const libc::int16_t, n: libc::size_t) {
@@ -166,12 +161,7 @@ pub extern "C" fn ffi_quicksort_u8(array_pointer: *const libc::uint8_t, n: libc:
     let mut to_sort = unsafe {
         slice::from_raw_parts_mut(array_pointer as *mut u8, n as usize)
     };
-
-    println!("Rust: n = {:?}        to_sort = {:?}", n, to_sort);
-
     sort(&mut to_sort);
-
-    println!("Rust:         sorted array = {:?}", to_sort);
 }
 #[no_mangle]
 pub extern "C" fn ffi_quicksort_u16(array_pointer: *const libc::uint16_t, n: libc::size_t) {
