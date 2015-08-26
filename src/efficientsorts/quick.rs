@@ -80,11 +80,22 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
         //     }
         // );
 
+        // Use the first element as the pivot, and loop over the rest of the vector.
         let mut pivot = 0;
         for i in 1..n {
+            // The loop element is smaller than the pivot. Shuffle things around to place that
+            // element before the pivot.
             if array[pivot] > array[i] {
-
+                // First, let's swap the element and the pivot.
                 array.swap(pivot, i);
+                // Two cases are possible here:
+                //     1) The element was the one next to the pivot in the vector. As such, the
+                //        new pivot's location is the index "i".
+                //     2) The element swaped was further down the vector. If we just swap the pivot
+                //        and that element, we are sending the pivot _after_ larger elements,
+                //        breaking the ordering! Additionally to the first swap, the pivot (now
+                //        being at index "i" after the first swap) is again swapped with the
+                //        element that was next to it before (index "pivot+1").
                 if i == pivot+1 {
                     pivot = i;
                 } else {
@@ -93,6 +104,8 @@ pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
                 }
             }
         }
+
+        // Recursively call the function of slices of the vector.
         sort(&mut array[0..pivot+1]);
         sort(&mut array[pivot+1..n]);
     }
