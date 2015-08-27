@@ -14,7 +14,7 @@ dtype = np.int32
 
 repeat = 4
 Nb_power_of_two = 20
-Ns = 2**np.arange(0, Nb_power_of_two)
+Ns = np.asarray(1.5**np.arange(0, Nb_power_of_two), dtype=int)
 
 fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
 
