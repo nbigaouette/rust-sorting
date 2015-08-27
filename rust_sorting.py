@@ -10,8 +10,8 @@ import numpy as np
 
 # Load the Rust library when loading this module
 
-target = "debug"
-# target = "release"
+# target = "debug"
+target = "release"
 
 libpath = os.path.join("target", target, "*")
 files = glob.glob(libpath)
