@@ -50,6 +50,7 @@ const SORTED_IND_FLOAT: [usize; 16] = [3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10,
 ///
 fn verify_sorted<T: PartialOrd>(array: &Vec<T>) {
     let n = array.len();
+    assert!(array.windows(2).all(|w| w[0] <= w[1]));
     if !array.is_empty() {
         for i in 0..n-1 {
             assert!(array[i] <= array[i+1]);
