@@ -6,7 +6,6 @@
 
 extern crate libc;
 
-use std::fmt::Debug;
 use std::slice;
 
 /// Quicksort
