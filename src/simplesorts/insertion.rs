@@ -158,7 +158,7 @@ pub extern "C" fn ffi_insertionsort_f32(array_pointer: *const libc::c_void, n: l
     assert!(!array_pointer.is_null());
     assert!(n != 0);
     let mut to_sort = unsafe {
-        Vec::from_raw_parts(array_pointer as *mut i32, n as usize, n as usize)
+        Vec::from_raw_parts(array_pointer as *mut f32, n as usize, n as usize)
     };
     sort(&mut to_sort);
 }
@@ -167,7 +167,7 @@ pub extern "C" fn ffi_insertionsort_f64(array_pointer: *const libc::c_void, n: l
     assert!(!array_pointer.is_null());
     assert!(n != 0);
     let mut to_sort = unsafe {
-        Vec::from_raw_parts(array_pointer as *mut i64, n as usize, n as usize)
+        Vec::from_raw_parts(array_pointer as *mut f64, n as usize, n as usize)
     };
     sort(&mut to_sort);
 }

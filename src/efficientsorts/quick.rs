@@ -195,7 +195,7 @@ pub extern "C" fn ffi_quicksort_f32(array_pointer: *const libc::c_void, n: libc:
     assert!(!array_pointer.is_null());
     assert!(n != 0);
     let mut to_sort = unsafe {
-        slice::from_raw_parts_mut(array_pointer as *mut i32, n as usize)
+        slice::from_raw_parts_mut(array_pointer as *mut f32, n as usize)
     };
     sort(&mut to_sort);
 }
@@ -204,7 +204,7 @@ pub extern "C" fn ffi_quicksort_f64(array_pointer: *const libc::c_void, n: libc:
     assert!(!array_pointer.is_null());
     assert!(n != 0);
     let mut to_sort = unsafe {
-        slice::from_raw_parts_mut(array_pointer as *mut i64, n as usize)
+        slice::from_raw_parts_mut(array_pointer as *mut f64, n as usize)
     };
     sort(&mut to_sort);
 }
