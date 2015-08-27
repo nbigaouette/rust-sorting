@@ -64,7 +64,7 @@ def run_benchmark(fct_name):
         for r in range(0, repeat):
             array = np.array(max_val*np.random.rand(N), dtype=dtype)
             t0 = t1
-            f(array)
+            fct_ptr(array)
             t1 = time.clock()
             data[Ni, r+1] = t1 - t0
     del Ni, N, r
