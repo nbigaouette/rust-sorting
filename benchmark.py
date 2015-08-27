@@ -110,6 +110,7 @@ def plot_timing(data):
     ax.legend(loc='best')
     ax.set_xlabel('N')
     ax.set_ylabel('Duration [s]')
+    ax.set_title('Scaling of different sorting algorithms implemented in Rust 1.2')
     on_key.show()
 
 if not args.reload:
