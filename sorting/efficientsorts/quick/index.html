@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `selection` mod in crate `sorting`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, selection">
+    <meta name="description" content="API documentation for the Rust `quick` mod in crate `sorting`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, quick">
 
-    <title>sorting::simplesorts::selection - Rust</title>
+    <title>sorting::efficientsorts::quick - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../../index.html'>sorting</a>::<wbr><a href='../index.html'>simplesorts</a></p><script>window.sidebarCurrent = {name: 'selection', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>sorting</a>::<wbr><a href='../index.html'>efficientsorts</a></p><script>window.sidebarCurrent = {name: 'quick', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -41,93 +41,93 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>sorting</a>::<wbr><a href='../index.html'>simplesorts</a>::<wbr><a class='mod' href=''>selection</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>sorting</a>::<wbr><a href='../index.html'>efficientsorts</a>::<wbr><a class='mod' href=''>quick</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-934' class='srclink' href='../../../src/sorting/simplesorts/selection.rs.html#1-171' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p>Selection sort algorithm.</p>
+        </span><a id='src-1869' class='srclink' href='../../../src/sorting/efficientsorts/quick.rs.html#1-209' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Quicksort algorithm.</p>
 
-<p>The <code>selection</code> module contains the simple sorting algorithm &quot;Selection Sort&quot;.</p>
+<p>The <code>efficient</code> module contains the efficient sorting algorithm &quot;Quicksort&quot;.</p>
 
-<p>Source: <a href="https://en.wikipedia.org/wiki/Selection_sort">https://en.wikipedia.org/wiki/Selection_sort</a></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Quicksort">https://en.wikipedia.org/wiki/Quicksort</a></p>
 </div><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_f32.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_f32'>ffi_selectionsort_f32</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_f32.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_f32'>ffi_quicksort_f32</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_f64.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_f64'>ffi_selectionsort_f64</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_f64.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_f64'>ffi_quicksort_f64</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_i16.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_i16'>ffi_selectionsort_i16</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_i16.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_i16'>ffi_quicksort_i16</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_i32.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_i32'>ffi_selectionsort_i32</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_i32.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_i32'>ffi_quicksort_i32</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_i64.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_i64'>ffi_selectionsort_i64</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_i64.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_i64'>ffi_quicksort_i64</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_i8.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_i8'>ffi_selectionsort_i8</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_i8.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_i8'>ffi_quicksort_i8</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_u16.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_u16'>ffi_selectionsort_u16</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_u16.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_u16'>ffi_quicksort_u16</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_u32.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_u32'>ffi_selectionsort_u32</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_u32.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_u32'>ffi_quicksort_u32</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_u64.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_u64'>ffi_selectionsort_u64</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_u64.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_u64'>ffi_quicksort_u64</a></td>
                         <td class='docblock short'>
                              
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='fn' href='fn.ffi_selectionsort_u8.html'
-                               title='sorting::simplesorts::selection::ffi_selectionsort_u8'>ffi_selectionsort_u8</a></td>
+                        <td><a class='fn' href='fn.ffi_quicksort_u8.html'
+                               title='sorting::efficientsorts::quick::ffi_quicksort_u8'>ffi_quicksort_u8</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -135,9 +135,9 @@
                 
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.sort.html'
-                               title='sorting::simplesorts::selection::sort'>sort</a></td>
+                               title='sorting::efficientsorts::quick::sort'>sort</a></td>
                         <td class='docblock short'>
-                             <p>Simple sort: selection sort.</p>
+                             <p>Quicksort</p>
 
                         </td>
                     </tr>

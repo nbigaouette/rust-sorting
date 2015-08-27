@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["sort","Simple sort: insertion sort."]]});
+initSidebarItems({"fn":[["ffi_insertionsort_f32",""],["ffi_insertionsort_f64",""],["ffi_insertionsort_i16",""],["ffi_insertionsort_i32",""],["ffi_insertionsort_i64",""],["ffi_insertionsort_i8",""],["ffi_insertionsort_u16",""],["ffi_insertionsort_u32",""],["ffi_insertionsort_u64",""],["ffi_insertionsort_u8",""],["sort","Simple sort: insertion sort."]]});

@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["sort","Simple sort: insertion sort."]]});

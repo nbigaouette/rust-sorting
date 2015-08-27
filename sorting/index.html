@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/sorting/lib.rs.html#1-61' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/sorting/lib.rs.html#1-172' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Sorting algorithms implementations in Rust (1.2).</p>
 
 <h1 id="goal" class='section-header'><a
@@ -97,24 +97,124 @@ validate every implementations.</p>
 <li><a href="https://en.wikipedia.org/wiki/Selection_sort">Selection sort</a></li>
 </ul>
 
+<h2 id="efficient-sorts" class='section-header'><a
+                           href="#efficient-sorts">Efficient sorts</a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort</a></li>
+</ul>
+
 <h1 id="usage" class='section-header'><a
                            href="#usage">Usage</a></h1>
 <h1 id="notes" class='section-header'><a
                            href="#notes">Notes</a></h1>
 <h1 id="testing-and-validation" class='section-header'><a
                            href="#testing-and-validation">Testing and validation</a></h1>
+<h1 id="benchmarks" class='section-header'><a
+                           href="#benchmarks">Benchmarks</a></h1>
+<p>The library uses Rust&#39;s FFI to export the sorting functions. A Python 3 module is provided
+<code>rust_sorting.py</code> that loads the library and exposes the different functions. The script
+<code>benchmark.py</code> will run the algorithms with arrays of random data multiple times and plot the
+timing calculations.</p>
+
+<p>To reproduce:</p>
+<pre class='rust rust-example-rendered'>
+<span class='ident'>cargo</span> <span class='ident'>build</span> <span class='op'>-</span><span class='op'>-</span><span class='ident'>release</span>
+<span class='ident'>python3</span> <span class='ident'>benchmark</span>.<span class='ident'>py</span>
+</pre>
+
+<p>To reload data and replot (no need for previous run):</p>
+<pre class='rust rust-example-rendered'>
+<span class='ident'>python3</span> <span class='ident'>benchmark</span>.<span class='ident'>py</span> <span class='op'>-</span><span class='op'>-</span><span class='ident'>reload</span>
+</pre>
+
+<p><img src="figures/benchmark.png" alt="Benchmark" title="Profiling of the different algorithms"></p>
+
 <h1 id="license" class='section-header'><a
                            href="#license">License</a></h1>
 <p>This code is distributed under the terms of the BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License
-and is Copyright 2014 Nicolas Bigaouette.</p>
+and is Copyright 2015 Nicolas Bigaouette.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='efficientsorts/index.html'
+                               title='sorting::efficientsorts'>efficientsorts</a></td>
+                        <td class='docblock short'>
+                             <p>Efficient sorting algorithms.</p>
+
+                        </td>
+                    </tr>
+                
                     <tr class=' module-item'>
                         <td><a class='mod' href='simplesorts/index.html'
                                title='sorting::simplesorts'>simplesorts</a></td>
                         <td class='docblock short'>
                              <p>Simple sorting algorithms.</p>
 
+                        </td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_i16.html'
+                               title='sorting::ffi_sort_i16'>ffi_sort_i16</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_i32.html'
+                               title='sorting::ffi_sort_i32'>ffi_sort_i32</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_i64.html'
+                               title='sorting::ffi_sort_i64'>ffi_sort_i64</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_i8.html'
+                               title='sorting::ffi_sort_i8'>ffi_sort_i8</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_u16.html'
+                               title='sorting::ffi_sort_u16'>ffi_sort_u16</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_u32.html'
+                               title='sorting::ffi_sort_u32'>ffi_sort_u32</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_u64.html'
+                               title='sorting::ffi_sort_u64'>ffi_sort_u64</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.ffi_sort_u8.html'
+                               title='sorting::ffi_sort_u8'>ffi_sort_u8</a></td>
+                        <td class='docblock short'>
+                             
                         </td>
                     </tr>
                 </table></section>

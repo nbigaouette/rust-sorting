@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/simplesorts/insertion.rs`.">
+    <meta name="description" content="Source to the Rust file `src/efficientsorts/quick.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
-    <title>insertion.rs.html -- source</title>
+    <title>quick.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
@@ -214,49 +214,67 @@
 <span id="172">172</span>
 <span id="173">173</span>
 <span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
 </pre><pre class='rust '>
-<span class='doccomment'>//! Insertion sort algorithm.</span>
+<span class='doccomment'>//! Quicksort algorithm.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The `insertion` module contains the simple sorting algorithm &quot;Insertion Sort&quot;.</span>
+<span class='doccomment'>//! The `efficient` module contains the efficient sorting algorithm &quot;Quicksort&quot;.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Source: https://en.wikipedia.org/wiki/Insertion_sort</span>
+<span class='doccomment'>//! Source: https://en.wikipedia.org/wiki/Quicksort</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>slice</span>;
 
-<span class='doccomment'>/// Simple sort: insertion sort.</span>
+<span class='doccomment'>/// Quicksort</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Details</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Insertion sort is one of the simplest sorting algorithm. Every elements of the list to sort</span>
-<span class='doccomment'>/// are picked one at a time and inserted into a the sorted list at the right location.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// This function takes an immutable reference vector of any type and returns a vector of `usize`</span>
-<span class='doccomment'>/// of the same length containing the indices of the initial vector sorted.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Scaling</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// In the best case scenario, the list is already sorted and the work is simply to append the</span>
-<span class='doccomment'>/// element at the end of the list, hence a O(N) scaling.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// In the worst case scenario, the list is in reverse order. Hence, every element is compared to</span>
-<span class='doccomment'>/// all previous elements already sorted until this new one gets inserted at the beginning of the</span>
-<span class='doccomment'>/// sorted list, thus making this case O(N^2).</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// Insertion sort is still useful as its simplicity (and thus small overhead) makes it ideal for</span>
-<span class='doccomment'>/// small vectors.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Optimizations</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Every element of the vector to sort are compared to the first and last element of the sorted</span>
-<span class='doccomment'>/// vector. This prevents the worst case scenario to happen. The implementation still keeps an</span>
-<span class='doccomment'>/// O(N^2) scaling though.</span>
+<span class='doccomment'>/// None</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Notes</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// The implementation is &#39;stable&#39; as it does preserve the relative order of items with</span>
-<span class='doccomment'>/// equal values.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the</span>
 <span class='doccomment'>/// compiler knows how to compare the elements and sort them.</span>
@@ -265,39 +283,91 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// let mut data: Vec&lt;i32&gt; = vec![4, 2, 3, 1, 5];</span>
-<span class='doccomment'>/// sorting::simplesorts::insertion::sort(&amp;mut data);</span>
+<span class='doccomment'>/// sorting::efficientsorts::quick::sort(&amp;mut data);</span>
 <span class='doccomment'>/// assert_eq!(vec![1, 2, 3, 4, 5], data);</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sort</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialOrd</span><span class='op'>&gt;</span>(<span class='ident'>input</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>]) {
-    <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>input</span>.<span class='ident'>len</span>();
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sort</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialOrd</span><span class='op'>&gt;</span>(<span class='ident'>array</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>]) {
+    <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>array</span>.<span class='ident'>len</span>();
 
-    <span class='comment'>// Start at second element, and insert every elements at the right location</span>
-    <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>1</span>..<span class='ident'>n</span> {
-        <span class='comment'>// Loop back over the already sorted subvector, and insert element &quot;i&quot; at the</span>
-        <span class='comment'>// proper location.</span>
-        <span class='kw'>for</span> <span class='ident'>j</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>i</span> {
-            <span class='comment'>// Element &quot;i&quot; is smaller than &quot;j&quot;, insert element &quot;i&quot; before &quot;j&quot; and</span>
-            <span class='comment'>// break the &quot;j&quot; loop.</span>
-            <span class='kw'>if</span> <span class='ident'>input</span>[<span class='ident'>j</span>] <span class='op'>&gt;</span> <span class='ident'>input</span>[<span class='ident'>i</span>] {
+    <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>&lt;=</span> <span class='number'>1</span> {
+        <span class='comment'>// Don&#39;t do anything</span>
+    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>==</span> <span class='number'>2</span> {
+        <span class='kw'>if</span> <span class='ident'>array</span>.<span class='ident'>first</span>() <span class='op'>&gt;</span> <span class='ident'>array</span>.<span class='ident'>last</span>() {
+            <span class='ident'>array</span>.<span class='ident'>swap</span>(<span class='number'>0</span>, <span class='number'>1</span>);
+        }
+    } <span class='kw'>else</span> {
+        <span class='comment'>// Pick a pivot: Pick the middle element by skipping half the length and keeping just one.</span>
+        <span class='comment'>// let it_pivot = array.iter().skip(n / 2).take(1);</span>
+        <span class='comment'>// Take the first element as the pivot.</span>
+        <span class='comment'>// let it_pivot = array.iter().take(1);</span>
+        <span class='comment'>//</span>
+        <span class='comment'>// for it in it_pivot {</span>
+        <span class='comment'>//     println!(&quot;  0. it: {:?}&quot;, it);</span>
+        <span class='comment'>// }</span>
 
-                <span class='comment'>// Move element &quot;i&quot; back in the vector by swaping it with all others until</span>
-                <span class='comment'>// it reaches the proper position (before &quot;j&quot;).</span>
-                <span class='kw'>for</span> <span class='ident'>k</span> <span class='kw'>in</span> (<span class='ident'>j</span>..<span class='ident'>i</span>).<span class='ident'>rev</span>() {
-                    <span class='ident'>input</span>.<span class='ident'>swap</span>(<span class='ident'>k</span><span class='op'>+</span><span class='number'>1</span>, <span class='ident'>k</span>);
+        <span class='comment'>// Loop over array, finding smaller elements than the pivot.</span>
+        <span class='comment'>// for it in array.iter().skip(1) {</span>
+        <span class='comment'>//     //println!(&quot;  1. it: {:?}&quot;, it);</span>
+        <span class='comment'>//     if it &lt; it_pivot {</span>
+        <span class='comment'>//         println!(&quot;  1. it: {:?} smaller than pivot!&quot;, it);</span>
+        <span class='comment'>//     }</span>
+        <span class='comment'>// }</span>
+        <span class='comment'>// array.swap(0,1);</span>
+
+        <span class='comment'>// array.iter().enumerate().map(|(i,x)| {});</span>
+
+        <span class='comment'>// // Take the first element as pivot.</span>
+        <span class='comment'>// let a = array.iter_mut().skip(1).enumerate().fold(</span>
+        <span class='comment'>//     (0, array[0]), |acc, item| {</span>
+        <span class='comment'>//         if acc.1 &gt; item.1 {</span>
+        <span class='comment'>//             // Element is smaller than pivot; swap them!</span>
+        <span class='comment'>//             array.swap(acc.0, item.0);</span>
+        <span class='comment'>//             // Return the accumulator as being the new index of pivot (which is now at</span>
+        <span class='comment'>//             // at the location of the fold()) with the pivot value which shouldn&#39;t change.</span>
+        <span class='comment'>//             (item.0, acc.1)</span>
+        <span class='comment'>//         } else {</span>
+        <span class='comment'>//             // Nothing to do as element is larger than pivot. Just return new accumulator.</span>
+        <span class='comment'>//             (acc.0, acc.1)</span>
+        <span class='comment'>//         }</span>
+        <span class='comment'>//     }</span>
+        <span class='comment'>// );</span>
+
+        <span class='comment'>// Use the first element as the pivot, and loop over the rest of the vector.</span>
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pivot</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>1</span>..<span class='ident'>n</span> {
+            <span class='comment'>// The loop element is smaller than the pivot. Shuffle things around to place that</span>
+            <span class='comment'>// element before the pivot.</span>
+            <span class='kw'>if</span> <span class='ident'>array</span>[<span class='ident'>pivot</span>] <span class='op'>&gt;</span> <span class='ident'>array</span>[<span class='ident'>i</span>] {
+                <span class='comment'>// First, let&#39;s swap the element and the pivot.</span>
+                <span class='ident'>array</span>.<span class='ident'>swap</span>(<span class='ident'>pivot</span>, <span class='ident'>i</span>);
+                <span class='comment'>// Two cases are possible here:</span>
+                <span class='comment'>//     1) The element was the one next to the pivot in the vector. As such, the</span>
+                <span class='comment'>//        new pivot&#39;s location is the index &quot;i&quot;.</span>
+                <span class='comment'>//     2) The element swaped was further down the vector. If we just swap the pivot</span>
+                <span class='comment'>//        and that element, we are sending the pivot _after_ larger elements,</span>
+                <span class='comment'>//        breaking the ordering! Additionally to the first swap, the pivot (now</span>
+                <span class='comment'>//        being at index &quot;i&quot; after the first swap) is again swapped with the</span>
+                <span class='comment'>//        element that was next to it before (index &quot;pivot+1&quot;).</span>
+                <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>==</span> <span class='ident'>pivot</span><span class='op'>+</span><span class='number'>1</span> {
+                    <span class='ident'>pivot</span> <span class='op'>=</span> <span class='ident'>i</span>;
+                } <span class='kw'>else</span> {
+                    <span class='ident'>array</span>.<span class='ident'>swap</span>(<span class='ident'>i</span>, <span class='ident'>pivot</span><span class='op'>+</span><span class='number'>1</span>);
+                    <span class='ident'>pivot</span> <span class='op'>=</span> <span class='ident'>pivot</span><span class='op'>+</span><span class='number'>1</span>;
                 }
-
-                <span class='comment'>// Go to the next element &quot;i&quot;.</span>
-                <span class='kw'>break</span>;
             }
         }
+
+        <span class='comment'>// Recursively call the function on slices of the vector.</span>
+        <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>array</span>[<span class='number'>0</span>..<span class='ident'>pivot</span><span class='op'>+</span><span class='number'>1</span>]);
+        <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>array</span>[<span class='ident'>pivot</span><span class='op'>+</span><span class='number'>1</span>..<span class='ident'>n</span>]);
     }
 }
 
 
 
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_i8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int8_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_i8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int8_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -306,7 +376,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_i16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int16_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_i16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int16_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -315,7 +385,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_i32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int32_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_i32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int32_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -324,7 +394,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_i64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int64_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_i64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int64_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -335,7 +405,7 @@
 
 
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_u8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint8_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_u8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint8_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -344,7 +414,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_u16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint16_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_u16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint16_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -353,7 +423,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_u32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint32_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_u32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint32_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -362,7 +432,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_u64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint64_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_u64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint64_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -372,7 +442,7 @@
 }
 
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_f32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_f32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -381,7 +451,7 @@
     <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_insertionsort_f64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_quicksort_f64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {

@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["simplesorts","Simple sorting algorithms."]]});
+initSidebarItems({"fn":[["ffi_sort_i16",""],["ffi_sort_i32",""],["ffi_sort_i64",""],["ffi_sort_i8",""],["ffi_sort_u16",""],["ffi_sort_u32",""],["ffi_sort_u64",""],["ffi_sort_u8",""]],"mod":[["efficientsorts","Efficient sorting algorithms."],["simplesorts","Simple sorting algorithms."]]});
