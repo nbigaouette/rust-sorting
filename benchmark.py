@@ -12,7 +12,7 @@ max_val = 10.0
 
 dtype = np.int32
 
-repeat = 4
+repeat = 10
 Nb_power_of_two = 20
 Ns = np.asarray(1.5**np.arange(0, Nb_power_of_two), dtype=int)
 
