@@ -5,9 +5,18 @@ import copy as cp
 import time
 import re
 import os
+import argparse
 
 import rust_sorting as rs
 import on_key
+
+
+parser = argparse.ArgumentParser(description='Benchmark sorting algorithms.')
+parser.add_argument('-r', '--reload', action='store_true',
+                    help="Don't run the benchmarks; just reload data and plot.")
+
+args = parser.parse_args()
+
 
 max_val = 10.0
 
@@ -87,8 +96,9 @@ def plot_timing(data):
     ax.set_ylabel('Duration [s]')
     on_key.show()
 
-for fct_name in fct_names:
-    run_benchmark(fct_name)
+if not args.reload:
+    for fct_name in fct_names:
+        run_benchmark(fct_name)
 
 for fct_name in fct_names:
     timing[fct_name] = load_benchmark(fct_name)
