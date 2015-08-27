@@ -47,7 +47,6 @@ for fi, f in enumerate(fct_ptrs):
 fig = on_key.figure()
 ax  = fig.add_subplot(1,1,1)
 p = re.compile(r"<function (\w+) at")
-# ax.errorbar(Ns, mean, yerr=std, label="Quicksort")
 for fi, f in enumerate(fct_ptrs):
     name = p.match(str(f)).group(1)
     ax.errorbar(Ns, mean[fi,:], yerr=std[fi,:], label=name)
