@@ -26,7 +26,8 @@ benchmark_dir = "benchmark"
 
 repeat = 10
 Nn = 30
-Ns = np.asarray(1.5**np.arange(0, Nn), dtype=int)
+Ns = np.unique(np.asarray(1.5**np.arange(0, Nn), dtype=int))
+Nn = len(Ns)
 
 fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
 
