@@ -15,7 +15,7 @@ dtypes = [np.int8,  np.int16,  np.int32,  np.int64,
 for dtype in dtypes:
     # print("dtype:", dtype)
 
-    array = np.array(max_val*np.random.rand(N), dtype=dtype)
+    array = np.array(max_val*(np.random.rand(N) - 0.5), dtype=dtype)
 
     orig_array = cp.deepcopy(array)
 
