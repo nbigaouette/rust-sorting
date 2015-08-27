@@ -13,12 +13,12 @@ max_val = 10.0
 dtype = np.int32
 
 repeat = 10
-Nb_power_of_two = 20
-Ns = np.asarray(1.5**np.arange(0, Nb_power_of_two), dtype=int)
+Nn = 20
+Ns = np.asarray(1.5**np.arange(0, Nn), dtype=int)
 
 fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
 
-timing = np.zeros((len(fct_ptrs), Nb_power_of_two, repeat), dtype=np.float64)
+timing = np.zeros((len(fct_ptrs), Nn, repeat), dtype=np.float64)
 
 print("Ns:", Ns)
 
@@ -40,8 +40,8 @@ mean = np.mean(timing, axis=2)
 std  = np.std(timing, axis=2)
 
 for fi, f in enumerate(fct_ptrs):
-    assert(len(mean[fi,:]) == Nb_power_of_two)
-    assert(len(std[fi,:])  == Nb_power_of_two)
+    assert(len(mean[fi,:]) == Nn)
+    assert(len(std[fi,:])  == Nn)
 
 fig = on_key.figure()
 ax  = fig.add_subplot(1,1,1)
