@@ -45,42 +45,6 @@ pub fn sort<T: PartialOrd>(array: &mut [T]) {
             array.swap(0, 1);
         }
     } else {
-        // Pick a pivot: Pick the middle element by skipping half the length and keeping just one.
-        // let it_pivot = array.iter().skip(n / 2).take(1);
-        // Take the first element as the pivot.
-        // let it_pivot = array.iter().take(1);
-        //
-        // for it in it_pivot {
-        //     println!("  0. it: {:?}", it);
-        // }
-
-        // Loop over array, finding smaller elements than the pivot.
-        // for it in array.iter().skip(1) {
-        //     //println!("  1. it: {:?}", it);
-        //     if it < it_pivot {
-        //         println!("  1. it: {:?} smaller than pivot!", it);
-        //     }
-        // }
-        // array.swap(0,1);
-
-        // array.iter().enumerate().map(|(i,x)| {});
-
-        // // Take the first element as pivot.
-        // let a = array.iter_mut().skip(1).enumerate().fold(
-        //     (0, array[0]), |acc, item| {
-        //         if acc.1 > item.1 {
-        //             // Element is smaller than pivot; swap them!
-        //             array.swap(acc.0, item.0);
-        //             // Return the accumulator as being the new index of pivot (which is now at
-        //             // at the location of the fold()) with the pivot value which shouldn't change.
-        //             (item.0, acc.1)
-        //         } else {
-        //             // Nothing to do as element is larger than pivot. Just return new accumulator.
-        //             (acc.0, acc.1)
-        //         }
-        //     }
-        // );
-
         // Use the first element as the pivot, and loop over the rest of the vector.
         let mut pivot = 0;
         for i in 1..n {
