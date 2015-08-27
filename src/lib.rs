@@ -56,12 +56,113 @@
 //!
 //! # Testing and validation
 //!
+//! # Benchmarks
+//!
+//! The library uses Rust's FFI to export the sorting functions. A Python 3 module is provided
+//! `rust_sorting.py` that loads the library and exposes the different functions. The script
+//! `benchmark.py` will run the algorithms with arrays of random data multiple times and plot the
+//! timing calculations.
+//!
+//! To reproduce:
+//!
+//!     cargo build --release
+//!     python3 benchmark.py
+//!
+//! To reload data and replot (no need for previous run):
+//!
+//!     python3 benchmark.py --reload
+//!
+//! ![Benchmark](figures/benchmark.png "Profiling of the different algorithms")
 //!
 //! # License
 //! This code is distributed under the terms of the BSD 3-clause "New" or "Revised" License
-//! and is Copyright 2014 Nicolas Bigaouette.
+//! and is Copyright 2015 Nicolas Bigaouette.
 //!
 //!
 
 pub mod simplesorts;
 pub mod efficientsorts;
+
+
+// Expose Rust's sort() method as if it was implemented here.
+// Useful for benchmarking and comparison.
+
+extern crate libc;
+
+use std::slice;
+
+
+#[no_mangle]
+pub extern "C" fn ffi_sort_i8(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut i8, n as usize)
+    };
+    to_sort.sort();
+}
+#[no_mangle]
+pub extern "C" fn ffi_sort_i16(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut i16, n as usize)
+    };
+    to_sort.sort();
+}
+#[no_mangle]
+pub extern "C" fn ffi_sort_i32(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut i32, n as usize)
+    };
+    to_sort.sort();
+}
+#[no_mangle]
+pub extern "C" fn ffi_sort_i64(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut i64, n as usize)
+    };
+    to_sort.sort();
+}
+
+
+#[no_mangle]
+pub extern "C" fn ffi_sort_u8(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut u8, n as usize)
+    };
+    to_sort.sort();
+}
+#[no_mangle]
+pub extern "C" fn ffi_sort_u16(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut u16, n as usize)
+    };
+    to_sort.sort();
+}
+#[no_mangle]
+pub extern "C" fn ffi_sort_u32(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut u32, n as usize)
+    };
+    to_sort.sort();
+}
+#[no_mangle]
+pub extern "C" fn ffi_sort_u64(array_pointer: *const libc::c_void, n: libc::size_t) {
+    assert!(!array_pointer.is_null());
+    assert!(n != 0);
+    let mut to_sort = unsafe {
+        slice::from_raw_parts_mut(array_pointer as *mut u64, n as usize)
+    };
+    to_sort.sort();
+}

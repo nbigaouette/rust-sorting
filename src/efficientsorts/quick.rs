@@ -6,7 +6,6 @@
 
 extern crate libc;
 
-use std::fmt::Debug;
 use std::slice;
 
 /// Quicksort
@@ -36,8 +35,7 @@ use std::slice;
 /// assert_eq!(vec![1, 2, 3, 4, 5], data);
 /// ```
 ///
-// pub fn sort<T: PartialOrd>(array: &mut Vec<T>) {
-pub fn sort<T: PartialOrd + Debug>(array: &mut [T]) {
+pub fn sort<T: PartialOrd>(array: &mut [T]) {
     let n = array.len();
 
     if n <= 1 {
@@ -196,7 +194,7 @@ pub extern "C" fn ffi_quicksort_f32(array_pointer: *const libc::c_void, n: libc:
     assert!(!array_pointer.is_null());
     assert!(n != 0);
     let mut to_sort = unsafe {
-        slice::from_raw_parts_mut(array_pointer as *mut i32, n as usize)
+        slice::from_raw_parts_mut(array_pointer as *mut f32, n as usize)
     };
     sort(&mut to_sort);
 }
@@ -205,7 +203,7 @@ pub extern "C" fn ffi_quicksort_f64(array_pointer: *const libc::c_void, n: libc:
     assert!(!array_pointer.is_null());
     assert!(n != 0);
     let mut to_sort = unsafe {
-        slice::from_raw_parts_mut(array_pointer as *mut i64, n as usize)
+        slice::from_raw_parts_mut(array_pointer as *mut f64, n as usize)
     };
     sort(&mut to_sort);
 }
