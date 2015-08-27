@@ -5,6 +5,7 @@ import copy as cp
 import time
 import re
 import os
+import glob
 import argparse
 
 import rust_sorting as rs
@@ -83,8 +84,7 @@ def run_benchmark(fct_name):
     del r
     np.savetxt(filename, data, header=header, fmt=fmt)
 
-def load_benchmark(fct_name):
-    filename = get_filename(fct_name)
+def load_benchmark(filename):
     data = np.loadtxt(filename, delimiter=',')
     return data
 
@@ -119,7 +119,10 @@ if not args.reload:
         run_benchmark(fct_name)
     del fct_name
 
-for fct_name in fct_names:
-    timing[fct_name] = load_benchmark(fct_name)
+p = re.compile(os.path.join(benchmark_dir, r"(\w+)\.txt"))
+files = glob.glob(os.path.join(benchmark_dir, "*"))
+for f in files:
+    fct_name = p.match(f).group(1)
+    timing[fct_name] = load_benchmark(f)
 
 plot_timing(timing)
