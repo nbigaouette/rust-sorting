@@ -69,5 +69,4 @@ To reload data and replot (no need for previous run):
 ![Benchmark](figures/benchmark.png "Profiling of the different algorithms")
 
 # License
-This code is distributed under the terms of the BSD 3-clause "New" or "Revised" License
-and is Copyright 2014 Nicolas Bigaouette.
+This code is distributed under the terms of the BSD 3-clause "New" or "Revised" License and is Copyright 2015 Nicolas Bigaouette.
