@@ -61,13 +61,17 @@ def run_benchmark(fct_name):
 
     t1 = time.clock()
     for Ni, N in enumerate(Ns):
-        print("Ni:", Ni, "  N:", N)
+        print("Ni: %2d   N: %6d..." % (Ni, N), end="")
         for r in range(0, repeat):
             array = np.array(max_val*np.random.rand(N), dtype=dtype)
             t0 = t1
             fct_ptr(array)
             t1 = time.clock()
             data[Ni, r+1] = t1 - t0
+        mean = np.mean(data[Ni, 1:])
+        std  = np.std(data[Ni, 1:])
+
+        print(" timing: %g +- %g (%.1f %%) s for %d repeats" % (mean, std, std/mean * 100, repeat))
     del Ni, N, r
 
     filename = get_filename(fct_name)
