@@ -65,12 +65,16 @@
 //!
 //! To reproduce:
 //!
-//!     cargo build --release
-//!     python3 benchmark.py
+//! ```ignore
+//! cargo build --release
+//! python3 benchmark.py
+//! ```
 //!
 //! To reload data and replot (no need for previous run):
 //!
-//!     python3 benchmark.py --reload
+//! ```ignore
+//! python3 benchmark.py --reload
+//! ```
 //!
 //! ![Benchmark](figures/benchmark.png "Profiling of the different algorithms")
 //!
