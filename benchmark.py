@@ -13,7 +13,7 @@ max_val = 10.0
 dtype = np.int32
 
 repeat = 10
-Nn = 20
+Nn = 30
 Ns = np.asarray(1.5**np.arange(0, Nn), dtype=int)
 
 fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
