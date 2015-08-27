@@ -55,7 +55,16 @@ API documentation can be found on GitHub pages at http://nbigaouette.github.io/r
 
 # Benchmarks
 
-The library uses Rust's FFI to export the sorting functions. A Python 3 module is provided `rust_sorting.py` that loads the library and exposes the different functions. The script `benchmark.py` will run the algorithms with arrays of random data multiple times and plot the timing calculations:
+The library uses Rust's FFI to export the sorting functions. A Python 3 module is provided `rust_sorting.py` that loads the library and exposes the different functions. The script `benchmark.py` will run the algorithms with arrays of random data multiple times and plot the timing calculations.
+
+To reproduce:
+
+    cargo build --release
+    python3 benchmark.py
+
+To reload data and replot (no need for previous run):
+
+    python3 benchmark.py --reload
 
 ![Benchmark](figures/bench_Ns30_optimized_4algo_log.png "Profiling of the different algorithms")
 
