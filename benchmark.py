@@ -22,6 +22,8 @@ max_val = 10.0
 
 dtype = np.int32
 
+benchmark_dir = "benchmark"
+
 repeat = 10
 Nn = 30
 Ns = np.asarray(1.5**np.arange(0, Nn), dtype=int)
@@ -42,6 +44,10 @@ for fi, f in enumerate(fct_ptrs):
 fct_ptrs = tmp
 
 
+def get_filename(fct_name):
+    filename = os.path.join(benchmark_dir, "%s.txt" % fct_name)
+    return filename
+
 def run_benchmark(fct_name):
     fct_ptr = fct_ptrs[fct_name]
     print(fct_name)
@@ -60,7 +66,7 @@ def run_benchmark(fct_name):
             t1 = time.clock()
             data[Ni, r+1] = t1 - t0
 
-    filename = os.path.join("benchmark", "%s.txt" % fct_name)
+    filename = get_filename(fct_name)
     header = "     N"
     fmt = "%8d"
     for r in range(0, repeat):
@@ -69,7 +75,7 @@ def run_benchmark(fct_name):
     np.savetxt(filename, data, header=header, fmt=fmt)
 
 def load_benchmark(fct_name):
-    filename = os.path.join("benchmark", "%s.txt" % fct_name)
+    filename = get_filename(fct_name)
     data = np.loadtxt(filename, delimiter=',')
     return data
 
