@@ -35,6 +35,7 @@ fct_names = [None]*len(fct_ptrs)
 p = re.compile(r"<function (\w+) at")
 for fi, f in enumerate(fct_ptrs):
     fct_names[fi] = p.match(str(f)).group(1)
+del fi, f
 
 timing = {}
 tmp    = {}
@@ -42,6 +43,7 @@ for fi, f in enumerate(fct_ptrs):
     timing[fct_names[fi]] = None
     tmp[fct_names[fi]] = f
 fct_ptrs = tmp
+del tmp, fi, f
 
 
 def get_filename(fct_name):
@@ -65,6 +67,7 @@ def run_benchmark(fct_name):
             f(array)
             t1 = time.clock()
             data[Ni, r+1] = t1 - t0
+    del Ni, N, r
 
     filename = get_filename(fct_name)
     header = "     N"
@@ -72,6 +75,7 @@ def run_benchmark(fct_name):
     for r in range(0, repeat):
         header = "%s,   Run #%-2d [s]" % (header, r+1)
         fmt    = "%s, %%13.7e" % (fmt)
+    del r
     np.savetxt(filename, data, header=header, fmt=fmt)
 
 def load_benchmark(fct_name):
@@ -95,6 +99,7 @@ def plot_timing(data):
         assert(len(N) == len(std))
 
         ax.errorbar(N, mean, yerr=std, label=fct_name)
+    del fct_name
 
     ax.grid(True)
     ax.legend(loc='best')
@@ -105,6 +110,7 @@ def plot_timing(data):
 if not args.reload:
     for fct_name in fct_names:
         run_benchmark(fct_name)
+    del fct_name
 
 for fct_name in fct_names:
     timing[fct_name] = load_benchmark(fct_name)
