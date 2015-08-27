@@ -3,6 +3,7 @@
 import numpy as np
 import copy as cp
 import time
+import re
 
 import rust_sorting as rs
 import on_key
@@ -45,9 +46,11 @@ for fi, f in enumerate(fct_ptrs):
 
 fig = on_key.figure()
 ax  = fig.add_subplot(1,1,1)
+p = re.compile(r"<function (\w+) at")
 # ax.errorbar(Ns, mean, yerr=std, label="Quicksort")
 for fi, f in enumerate(fct_ptrs):
-    ax.errorbar(Ns, mean[fi,:], yerr=std[fi,:], label=f)
+    name = p.match(str(f)).group(1)
+    ax.errorbar(Ns, mean[fi,:], yerr=std[fi,:], label=name)
 ax.grid(True)
 ax.legend(loc='best')
 ax.set_xlabel('N')
