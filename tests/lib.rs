@@ -14,17 +14,11 @@ const TO_SORT_U8:  [u8;  16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 
 const TO_SORT_U16: [u16; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
 const TO_SORT_U32: [u32; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
 const TO_SORT_U64: [u64; 16] = [6,  5,  3,  1,  2, 4, 10, 7, 3, 32, 44, 56, 67, 3, 44, 2];
-const SORTED_IND_INT:  [usize; 16] = [3, 4, 15, 2, 8, 13, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
 
 const TO_SORT_F32: [f32; 16] = [6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
 const TO_SORT_F64: [f64; 16] = [6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
                                 3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
-// NOTE: The order is different for the floats because of the fractional parts. For example,
-//       "2.0" comes before "2.4", while in the integer arrays it was "2" vs "2". Since the
-//       algorithms are stable, the floating points vector will get a different sorting sequence.
-const SORTED_IND_FLOAT: [usize; 16] = [3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
-
 
 
 
@@ -48,7 +42,7 @@ const SORTED_IND_FLOAT: [usize; 16] = [3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10,
 /// verify_sorting(&data);
 /// ```
 ///
-fn verify_sorted<T: PartialOrd>(array: &Vec<T>) {
+fn verify_sorted<T: PartialOrd>(array: &[T]) {
     let n = array.len();
     assert!(array.windows(2).all(|w| w[0] <= w[1]));
     if !array.is_empty() {
@@ -59,37 +53,9 @@ fn verify_sorted<T: PartialOrd>(array: &Vec<T>) {
 }
 
 
-/// Verify order of input vector as sorted by indices.
-///
-/// # Details
-///
-/// This function takes as arguments a vector of data and a vector representing the indices of the
-/// first vector making it sorted.
-///
-/// The elements of the sorted vector are compared to the next ones to make sure they are less
-/// or equal.
-///
-/// # Panics
-///
-/// The sorting of the data vector is enforced using `assert!()`.
-///
-/// # Examples
-///
-/// ```
-/// let data: Vec<i32> = vec![4, 2, 3, 1];
-/// let sorted_indices: Vec<usize> = vec![3, 1, 2, 0];
-/// verify_sorting(&data, &sorted_indices);
-/// ```
-///
-fn verify_sorting<T: PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<usize>) {
-    let n = array.len();
-    assert_eq!(n , sorted_indices.len());
-
-    if !array.is_empty() {
-        for i in 0..n-1 {
-            assert!(array[sorted_indices[i]] <= array[sorted_indices[i+1]]);
-        }
-    }
+fn test_sort_vec<T: PartialOrd>(to_sort: &mut [T], sorting_fct: fn(&mut [T])) {
+    sorting_fct(to_sort);
+    verify_sorted(to_sort);
 }
 
 
@@ -111,53 +77,11 @@ fn verify_sorting<T: PartialOrd>(array: &Vec<T>, sorted_indices: &Vec<usize>) {
 /// test_empty_vec::<i8>(sorting::simplesorts::insertion::sort);
 /// ```
 ///
-fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
-    let to_sort: Vec<T> = vec![];
-    let sorted_indices = sorting_fct(&to_sort);
-    assert_eq!(sorted_indices, vec![]);
-    assert!(sorted_indices.is_empty());
+fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&mut [T])) {
+    let mut to_sort: Vec<T> = vec![];
+    sorting_fct(&mut to_sort);
+    assert_eq!(to_sort.len(), 0);
 }
-
-
-/// Call the specified sorting function on an specific vector of floats and validate the output.
-///
-/// # Details
-///
-/// This function takes as arguments:
-///    1. An immutable vector of floats, to be sorted;
-///    2. An immutable vector of indices as the reference to compare with;
-///    3. A function pointer to be called on the first vector.
-///
-/// # Panics
-///
-/// This calls the function `verify_sorting()` which will assert if the result is not in order.
-/// It also compares the resulting indices with expected values using asserts.
-///
-/// # Examples
-///
-/// ```
-/// let to_sort: Vec<f32> = vec![6.0,   5.0,  3.0,  1.0,  2.4, 4.0, 10.0, 7.0,
-///                              3.42, 32.2, 44.2, 56.3, 67.9, 3.2, 44.2, 2.0];
-///
-/// let known_sorted_indices = vec![3, 15, 4, 2, 13, 8, 5, 1, 0, 7, 6, 9, 10, 14, 11, 12];
-///
-/// test_sort_vec_float::<f32>(&to_sort, &known_sorted_indices,
-///                            sorting::simplesorts::insertion::sort);
-/// ```
-///
-fn test_sort_vec_float<T: PartialOrd>(to_sort: &Vec<T>, expected_indices: &Vec<usize>,
-                                      sorting_fct: fn(&Vec<T>) -> Vec<usize>) {
-    let sorted_indices = sorting_fct(&to_sort);
-
-    verify_sorting(&to_sort, &sorted_indices);
-
-    assert_eq!(sorted_indices.len(), expected_indices.len());
-
-    for i in 0..to_sort.len() {
-        assert_eq!(sorted_indices[i], expected_indices[i]);
-    }
-}
-
 
 
 /// Validate against empty vector (i8).
@@ -228,102 +152,82 @@ fn simple_insertion_empty_vec_f64() {
 /// Validate sorting of a const vector (i8).
 #[test]
 fn simple_insertion_vec_i8() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
 
-    test_sort_vec_float::<i8>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<i8>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (i16).
 #[test]
 fn simple_insertion_vec_i16() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
 
-    test_sort_vec_float::<i16>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<i16>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (i32).
 #[test]
 fn simple_insertion_vec_i32() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
 
-    test_sort_vec_float::<i32>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<i32>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (i64).
 #[test]
 fn simple_insertion_vec_i64() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
 
-    test_sort_vec_float::<i64>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<i64>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (u8).
 #[test]
 fn simple_insertion_vec_u8() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
 
-    test_sort_vec_float::<u8>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<u8>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (u16).
 #[test]
 fn simple_insertion_vec_u16() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
 
-    test_sort_vec_float::<u16>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<u16>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (u32).
 #[test]
 fn simple_insertion_vec_u32() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
 
-    test_sort_vec_float::<u32>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<u32>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting of a const vector (u64).
 #[test]
 fn simple_insertion_vec_u64() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_INT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
 
-    test_sort_vec_float::<u64>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<u64>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 
 /// Validate sorting a vector of single precision values (f32).
 #[test]
 fn simple_insertion_vec_f32() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_FLOAT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
 
-    test_sort_vec_float::<f32>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<f32>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 /// Validate sorting a vector of double precision values (f64).
 #[test]
 fn simple_insertion_vec_f64() {
-    let to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
-    let known_sorted_indices: Vec<usize> = From::from(&SORTED_IND_FLOAT[..]);
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
 
-    test_sort_vec_float::<f64>(&to_sort, &known_sorted_indices,
-                               sorting::simplesorts::insertion::sort);
+    test_sort_vec::<f64>(&mut to_sort, sorting::simplesorts::insertion::sort);
 }
 
 
