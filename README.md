@@ -66,7 +66,7 @@ To reload data and replot (no need for previous run):
 
     python3 benchmark.py --reload
 
-![Benchmark](figures/bench_Ns30_optimized_4algo_log.png "Profiling of the different algorithms")
+![Benchmark](figures/benchmark.png "Profiling of the different algorithms")
 
 # License
 This code is distributed under the terms of the BSD 3-clause "New" or "Revised" License
