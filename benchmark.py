@@ -17,6 +17,10 @@ Nn = 30
 Ns = np.asarray(1.5**np.arange(0, Nn), dtype=int)
 
 fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
+names = [None]*len(fct_ptrs)
+p = re.compile(r"<function (\w+) at")
+for fi, f in enumerate(fct_ptrs):
+    names[fi] = p.match(str(f)).group(1)
 
 timing = np.zeros((len(fct_ptrs), Nn, repeat), dtype=np.float64)
 
@@ -45,10 +49,8 @@ for fi, f in enumerate(fct_ptrs):
 
 fig = on_key.figure()
 ax  = fig.add_subplot(1,1,1)
-p = re.compile(r"<function (\w+) at")
 for fi, f in enumerate(fct_ptrs):
-    name = p.match(str(f)).group(1)
-    ax.errorbar(Ns, mean[fi,:], yerr=std[fi,:], label=name)
+    ax.errorbar(Ns, mean[fi,:], yerr=std[fi,:], label=names[fi])
 ax.grid(True)
 ax.legend(loc='best')
 ax.set_xlabel('N')
