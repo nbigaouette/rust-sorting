@@ -42,6 +42,9 @@ use std::slice;
 pub fn sort<T: PartialOrd>(array: &mut [T]) {
     let n = array.len();
 
+    // NOTE: Insertion could be used for "small" number of elements as an optimization. It is not
+    //       used here as to show exactly how quicksort works.
+
     if n <= 1 {
         // Don't do anything
     } else if n == 2 {
