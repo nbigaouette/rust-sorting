@@ -158,3 +158,37 @@ def quicksort(array):
          raise NotImplementedError
 
     rust_sort(ptr, n)
+
+
+def mergesort(array):
+
+    ptr = ctypes.c_void_p(array.ctypes.data)
+    n   = len(array)
+
+    if array.dtype == np.int8:
+        rust_sort = rustlib.ffi_mergesort_i8
+    elif array.dtype == np.int16:
+        rust_sort = rustlib.ffi_mergesort_i16
+    elif array.dtype == np.int32:
+        rust_sort = rustlib.ffi_mergesort_i32
+    elif array.dtype == np.int64:
+        rust_sort = rustlib.ffi_mergesort_i64
+
+    elif array.dtype == np.uint8:
+        rust_sort = rustlib.ffi_mergesort_u8
+    elif array.dtype == np.uint16:
+        rust_sort = rustlib.ffi_mergesort_u16
+    elif array.dtype == np.uint32:
+        rust_sort = rustlib.ffi_mergesort_u32
+    elif array.dtype == np.uint64:
+        rust_sort = rustlib.ffi_mergesort_u64
+
+    elif array.dtype == np.float32:
+        rust_sort = rustlib.ffi_mergesort_f32
+    elif array.dtype == np.float64:
+        rust_sort = rustlib.ffi_mergesort_f64
+
+    else:
+         raise NotImplementedError
+
+    rust_sort(ptr, n)
