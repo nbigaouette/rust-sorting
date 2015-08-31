@@ -47,6 +47,7 @@
 //!
 //! * [Quicksort](https://en.wikipedia.org/wiki/Quicksort)
 //! * [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)
+//! * [Heapsort](https://en.wikipedia.org/wiki/Heapsort)
 //!
 //!
 //! # Usage
