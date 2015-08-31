@@ -13,20 +13,37 @@ use std::ptr;
 ///
 /// # Details
 ///
+/// Merge sort splits a vector into two subvectors and sorts them recursively. Once the two
+/// parts are sorted, they are merged together in proper ordering.
 ///
+/// This implementation is "top-down" as it splits the initial vector into two until there is
+/// only a single element per subvector. It then moves up the recursion by merging these
+/// subvectors.
 ///
 /// # Scaling
 ///
+/// Merge sort is of order O(N log N) as it takes log N steps to recurse into the vectors spliting
+/// and N steps per level to merge these subvectors.
 ///
+/// Merge sort cannot merge in-place without shifting elements often in the merge process. To
+/// prevent this shifting, a temporary vector is allocated (and freed) at every level of the
+/// recursion. This temporary vector has the same size as the vector that is split in two at every
+/// level. During the last merging step the allocation is the same size as the initial vector to
+/// sort, hence the space complexity is O(N).
 ///
 /// # Optimizations
 ///
-///
+/// An unsafe block is used to copy the content of the temporary vector back into the function
+/// argument through `ptr::copy_nonoverlapping()`. Without this, one would have to loop over
+/// every elements which would be highly inefficient.
 ///
 /// # Notes
 ///
 /// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the
 /// compiler knows how to compare the elements and sort them.
+///
+/// Also, the trait `Clone` must also be implemented for `T` to be able to copy the vector elements
+/// into the temporary vector.
 ///
 /// # Examples
 ///
