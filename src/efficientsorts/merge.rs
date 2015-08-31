@@ -7,6 +7,7 @@
 extern crate libc;
 
 use std::slice;
+use std::process;
 
 /// Mergesort
 ///
@@ -35,10 +36,85 @@ use std::slice;
 /// assert_eq!(vec![1, 2, 3, 4, 5], data);
 /// ```
 ///
-pub fn sort<T: PartialOrd>(array: &mut [T]) {
-    let n = array.len();
+use std::fmt::Debug;
+pub fn sort<T: PartialOrd+Debug+Clone>(input: &mut [T]) {
+    let n = input.len();
 
-    unimplemented!();
+    println!("MERGESORT: input = {:?}  n = {}", input, n);
+
+    if n <= 1 {
+        // return;
+    } else if n == 2 {
+        if input.first() > input.last() {
+            input.swap(0, 1);
+        }
+    } else {
+        assert!(n > 2);
+
+        // The subvectors of input are now sorted. Merge them into temporary buffer.
+        let mut tmp: Vec<T> = Vec::with_capacity(n);
+
+        {
+        let n2 = n / 2;
+        let (mut split_left, mut split_right) = input.split_at_mut(n2);
+
+        println!("    split_left:    {:?}", split_left);
+        println!("    split_right:   {:?}", split_right);
+
+        println!("    Calling MERGESORT recursively...");
+        // Recursively call the function on slices of the vector.
+        sort(&mut split_left);
+        sort(&mut split_right);
+        println!("    Calling MERGESORT recursively done!");
+
+        println!("    split_left:    {:?}", split_left);
+        println!("    split_right:   {:?}", split_right);
+
+        let mut split_left  = split_left.to_vec();
+        let mut split_right = split_right.to_vec();
+
+        println!("Merging left and right: Looping over k/{:?}...", n);
+        for k in 0..n {
+            let len_left  = split_left.len();
+            let len_right = split_right.len();
+            println!("k = {}  lengths = {:?}", k, (len_left, len_right));
+            if len_left != 0 && len_right != 0 {
+                let take_left: bool = split_left.first() < split_right.first();
+                if take_left {
+                    println!("    Taking left");
+                    tmp.push(split_left.remove(0));
+                } else {
+                    println!("    Taking right");
+                    tmp.push(split_right.remove(0));
+                }
+            } else if len_left == 0 {
+                println!("    Left empty: Taking right");
+                // Left is now empty
+                assert!(len_left  == 0);
+                assert!(len_right != 0);
+                tmp.push(split_right.remove(0));
+            } else {
+                println!("    Right empty: Taking left");
+                // Right is now empty
+                assert!(len_left  != 0);
+                assert!(len_right == 0);
+                tmp.push(split_left.remove(0));
+            }
+            println!("   tmp = {:?}", tmp);
+        }
+        }
+        println!(" tmp = {:?}", tmp);
+
+        // Copy content of "tmp" back into "input" vector.
+        assert_eq!(tmp.len(), n);
+        // input = &mut tmp[..];
+        for k in 0..n {
+            input[k] = tmp[k].clone();
+        }
+    }
+
+    println!("MERGESORT: output = {:?}  n = {}", input, n);
+}
 
 
 
