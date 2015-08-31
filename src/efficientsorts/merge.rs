@@ -7,6 +7,7 @@
 extern crate libc;
 
 use std::slice;
+use std::ptr;
 
 /// Mergesort
 ///
@@ -88,9 +89,14 @@ pub fn sort<T: PartialOrd+Clone>(input: &mut [T]) {
 
         // Copy content of "tmp" back into "input" vector.
         assert_eq!(tmp.len(), n);
-        // input = &mut tmp[..];
-        for k in 0..n {
-            input[k] = tmp[k].clone();
+        // for k in 0..n {
+        //     input[k] = tmp[k].clone();
+        //     // unsafe {
+        //     //     input[k] = tmp.get_unchecked(k).clone();
+        //     // }
+        // }
+        unsafe {
+            ptr::copy_nonoverlapping(tmp.as_ptr(), input.as_mut_ptr(), n);
         }
     }
 }
