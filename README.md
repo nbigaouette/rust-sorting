@@ -43,6 +43,12 @@ Sorting functions are encapsulated into modules. Implemented algorithms are:
 * [Insertion sort](https://en.wikipedia.org/wiki/Insertion_sort)
 * [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)
 
+## Efficient sorts
+
+* [Quicksort](https://en.wikipedia.org/wiki/Quicksort)
+* [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)
+
+
 # Usage
 
 

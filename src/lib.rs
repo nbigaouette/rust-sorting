@@ -46,6 +46,7 @@
 //! ## Efficient sorts
 //!
 //! * [Quicksort](https://en.wikipedia.org/wiki/Quicksort)
+//! * [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)
 //!
 //!
 //! # Usage
