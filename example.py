@@ -25,7 +25,8 @@ for dtype in dtypes:
     # rs.insertionsort(array)
     # rs.selectionsort(array)
     # rs.quicksort(array)
-    rs.mergesort(array)
+    # rs.mergesort(array)
+    rs.heapsort(array)
 
     # print("Python:      sorted  =", repr(array))
 

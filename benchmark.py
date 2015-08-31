@@ -30,7 +30,9 @@ Nn = 30
 Ns = np.unique(np.asarray(1.5**np.arange(0, Nn), dtype=int))
 Nn = len(Ns)
 
-fct_ptrs = [rs.sort, rs.quicksort, rs.mergesort, rs.insertionsort, rs.selectionsort]
+fct_ptrs = [rs.sort,
+            rs.quicksort, rs.mergesort, rs.heapsort,
+            rs.insertionsort, rs.selectionsort]
 
 
 fct_names = [None]*len(fct_ptrs)
@@ -110,6 +112,7 @@ def plot_timing(data):
     ax.legend(loc='best')
     ax.set_xlabel('N')
     ax.set_ylabel('Duration [s]')
+    ax.set_xscale('log')
     ax.set_yscale('log')
     ax.set_title('Scaling of different sorting algorithms implemented in Rust 1.2')
     on_key.show()
