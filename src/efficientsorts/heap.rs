@@ -16,18 +16,19 @@ use std::slice;
 ///
 /// # Scaling
 ///
-///
+/// Heap sort has O(N log N) average case complexity and O(N) space complexity due to the
+/// `sift_down()` implementation.
 ///
 /// # Optimizations
 ///
-///
+/// None
 ///
 /// # Notes
 ///
 /// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the
 /// compiler knows how to compare the elements and sort them.
 ///
-///
+/// The design comes from the Wikipedia page on heap sort.
 ///
 /// # Examples
 ///
@@ -67,7 +68,7 @@ fn heapify<T: PartialOrd>(input: &mut [T]) {
     let n = input.len();
     let end = n - 1;
 
-    // Last element is at "n-1". Find its parent:
+    // Last element is at "n-1". Find its parent and start there:
     let mut start: usize = node_parent_id(n-1);
 
     loop {
@@ -80,6 +81,8 @@ fn heapify<T: PartialOrd>(input: &mut [T]) {
 fn sift_down<T: PartialOrd>(input: &mut [T], start: usize, end: usize) {
     let mut i = start;
 
+    // Starting at the "start" element, loop "down" the vector and swap elements that are
+    // not in max-heap order.
     while node_child_left(i) <= end {
         let child = node_child_left(i);
         let mut swap = i;
