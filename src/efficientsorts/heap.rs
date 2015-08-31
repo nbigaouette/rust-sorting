@@ -40,9 +40,65 @@ use std::slice;
 pub fn sort<T: PartialOrd+Clone>(input: &mut [T]) {
     let n = input.len();
 
-    unimplemented!();
+    heapify(input);
+
+    let mut end = n - 1;
+    while end > 0 {
+        input.swap(end, 0);
+        end -= 1;
+        sift_down(input, 0, end);
+    }
 }
 
+fn node_parent_id(i: usize) -> usize {
+    if i == 0 { 0 }
+    else      { (i - 1) / 2 }
+}
+
+fn node_child_left(i: usize) -> usize {
+    2 * i + 1
+}
+
+// fn node_child_right(i: usize) -> usize {
+//     2 * i + 2
+// }
+
+fn heapify<T: PartialOrd>(input: &mut [T]) {
+    let n = input.len();
+    let end = n - 1;
+
+    // Last element is at "n-1". Find its parent:
+    let mut start: usize = node_parent_id(n-1);
+
+    loop {
+        sift_down(input, start, end);
+        if start == 0 { break; }
+        start -= 1;
+    }
+}
+
+fn sift_down<T: PartialOrd>(input: &mut [T], start: usize, end: usize) {
+    let mut root = start;
+
+    while node_child_left(root) <= end {
+        let child = node_child_left(root);
+        let mut swap = root;
+
+        if input[swap] < input[child] {
+            swap = child;
+        }
+        if child+1 <= end && input[swap] < input[child+1] {
+            swap = child + 1;
+        }
+
+        if swap == root {
+            return;
+        } else {
+            input.swap(root, swap);
+            root = swap;
+        }
+    }
+}
 
 
 #[no_mangle]
