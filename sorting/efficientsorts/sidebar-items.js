@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["merge","Mergesort algorithm."],["quick","Quicksort algorithm."]]});
+initSidebarItems({"mod":[["heap","Heap sort algorithm."],["merge","Mergesort algorithm."],["quick","Quicksort algorithm."]]});
