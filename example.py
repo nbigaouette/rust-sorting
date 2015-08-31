@@ -30,4 +30,4 @@ for dtype in dtypes:
 
     assert((array == np.sort(orig_array)).all())
 
-print("Python done!")
+print("Python done and sorted!")
