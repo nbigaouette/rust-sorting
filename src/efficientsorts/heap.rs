@@ -78,11 +78,11 @@ fn heapify<T: PartialOrd>(input: &mut [T]) {
 }
 
 fn sift_down<T: PartialOrd>(input: &mut [T], start: usize, end: usize) {
-    let mut root = start;
+    let mut i = start;
 
-    while node_child_left(root) <= end {
-        let child = node_child_left(root);
-        let mut swap = root;
+    while node_child_left(i) <= end {
+        let child = node_child_left(i);
+        let mut swap = i;
 
         if input[swap] < input[child] {
             swap = child;
@@ -91,11 +91,11 @@ fn sift_down<T: PartialOrd>(input: &mut [T], start: usize, end: usize) {
             swap = child + 1;
         }
 
-        if swap == root {
+        if swap == i {
             return;
         } else {
-            input.swap(root, swap);
-            root = swap;
+            input.swap(i, swap);
+            i = swap;
         }
     }
 }
