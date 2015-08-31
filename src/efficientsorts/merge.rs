@@ -74,13 +74,13 @@ pub fn sort<T: PartialOrd+Clone>(input: &mut [T]) {
                 }
             } else if len_left == 0 {
                 // Left is now empty
-                assert!(len_left  == 0);
-                assert!(len_right != 0);
+                debug_assert!(len_left  == 0);
+                debug_assert!(len_right != 0);
                 tmp.push(split_right.remove(0));
             } else {
                 // Right is now empty
-                assert!(len_left  != 0);
-                assert!(len_right == 0);
+                debug_assert!(len_left  != 0);
+                debug_assert!(len_right == 0);
                 tmp.push(split_left.remove(0));
             }
         }
