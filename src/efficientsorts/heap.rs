@@ -37,7 +37,7 @@ use std::slice;
 /// assert_eq!(vec![1, 2, 3, 4, 5], data);
 /// ```
 ///
-pub fn sort<T: PartialOrd+Clone>(input: &mut [T]) {
+pub fn sort<T: PartialOrd>(input: &mut [T]) {
     let n = input.len();
 
     heapify(input);
