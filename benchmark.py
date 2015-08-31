@@ -30,7 +30,7 @@ Nn = 30
 Ns = np.unique(np.asarray(1.5**np.arange(0, Nn), dtype=int))
 Nn = len(Ns)
 
-fct_ptrs = [rs.sort, rs.quicksort, rs.insertionsort, rs.selectionsort]
+fct_ptrs = [rs.sort, rs.quicksort, rs.mergesort, rs.insertionsort, rs.selectionsort]
 
 
 fct_names = [None]*len(fct_ptrs)

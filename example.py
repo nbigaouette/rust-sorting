@@ -24,10 +24,11 @@ for dtype in dtypes:
     # rs.sort(array)
     # rs.insertionsort(array)
     # rs.selectionsort(array)
-    rs.quicksort(array)
+    # rs.quicksort(array)
+    rs.mergesort(array)
 
     # print("Python:      sorted  =", repr(array))
 
     assert((array == np.sort(orig_array)).all())
 
-print("Python done!")
+print("Python done and sorted!")
