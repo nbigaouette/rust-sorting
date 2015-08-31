@@ -51,37 +51,40 @@ pub fn sort<T: PartialOrd+Clone>(input: &mut [T]) {
         // The subvectors of input are now sorted. Merge them into temporary buffer.
         let mut tmp: Vec<T> = Vec::with_capacity(n);
 
+        // New code block as to enforce "split_left" and "split_right"'s lifetime, ending the
+        // mutable borrow on input. This is required to copy the elements of "tmp" back
+        // into "input".
         {
-        let n2 = n / 2;
-        let (mut split_left, mut split_right) = input.split_at_mut(n2);
+            let n2 = n / 2;
+            let (mut split_left, mut split_right) = input.split_at_mut(n2);
 
-        // Recursively call the function on slices of the vector.
-        sort(&mut split_left);
-        sort(&mut split_right);
+            // Recursively call the function on slices of the vector.
+            sort(&mut split_left);
+            sort(&mut split_right);
 
-        let mut iter_left  = split_left.iter().peekable();
-        let mut iter_right = split_right.iter().peekable();
+            let mut iter_left  = split_left.iter().peekable();
+            let mut iter_right = split_right.iter().peekable();
 
-        for _ in 0..n {
-            if !iter_left.peek().is_none() && !iter_right.peek().is_none() {
-                let take_left: bool = iter_left.peek() < iter_right.peek();
-                if take_left {
-                    tmp.push(iter_left.next().cloned().unwrap());
-                } else {
+            for _ in 0..n {
+                if !iter_left.peek().is_none() && !iter_right.peek().is_none() {
+                    let take_left: bool = iter_left.peek() < iter_right.peek();
+                    if take_left {
+                        tmp.push(iter_left.next().cloned().unwrap());
+                    } else {
+                        tmp.push(iter_right.next().cloned().unwrap());
+                    }
+                } else if iter_left.peek().is_none() {
+                    // Left is now empty: take right
+                    debug_assert!(iter_left.peek().is_none());
+                    debug_assert!(!iter_right.peek().is_none());
                     tmp.push(iter_right.next().cloned().unwrap());
+                } else {
+                    // Right is now empty: take left
+                    debug_assert!(!iter_left.peek().is_none());
+                    debug_assert!(iter_right.peek().is_none());
+                    tmp.push(iter_left.next().cloned().unwrap());
                 }
-            } else if iter_left.peek().is_none() {
-                // Left is now empty: take right
-                debug_assert!(iter_left.peek().is_none());
-                debug_assert!(!iter_right.peek().is_none());
-                tmp.push(iter_right.next().cloned().unwrap());
-            } else {
-                // Right is now empty: take left
-                debug_assert!(!iter_left.peek().is_none());
-                debug_assert!(iter_right.peek().is_none());
-                tmp.push(iter_left.next().cloned().unwrap());
             }
-        }
         }
 
         // Copy content of "tmp" back into "input" vector.
