@@ -59,42 +59,33 @@ pub fn sort<T: PartialOrd+Clone>(input: &mut [T]) {
         sort(&mut split_left);
         sort(&mut split_right);
 
-        let mut split_left  = split_left.to_vec();
-        let mut split_right = split_right.to_vec();
+        let mut iter_left  = split_left.iter().peekable();
+        let mut iter_right = split_right.iter().peekable();
 
         for _ in 0..n {
-            let len_left  = split_left.len();
-            let len_right = split_right.len();
-
-            if len_left != 0 && len_right != 0 {
-                let take_left: bool = split_left.first() < split_right.first();
+            if !iter_left.peek().is_none() && !iter_right.peek().is_none() {
+                let take_left: bool = iter_left.peek() < iter_right.peek();
                 if take_left {
-                    tmp.push(split_left.remove(0));
+                    tmp.push(iter_left.next().cloned().unwrap());
                 } else {
-                    tmp.push(split_right.remove(0));
+                    tmp.push(iter_right.next().cloned().unwrap());
                 }
-            } else if len_left == 0 {
-                // Left is now empty
-                debug_assert!(len_left  == 0);
-                debug_assert!(len_right != 0);
-                tmp.push(split_right.remove(0));
+            } else if iter_left.peek().is_none() {
+                // Left is now empty: take right
+                debug_assert!(iter_left.peek().is_none());
+                debug_assert!(!iter_right.peek().is_none());
+                tmp.push(iter_right.next().cloned().unwrap());
             } else {
-                // Right is now empty
-                debug_assert!(len_left  != 0);
-                debug_assert!(len_right == 0);
-                tmp.push(split_left.remove(0));
+                // Right is now empty: take left
+                debug_assert!(!iter_left.peek().is_none());
+                debug_assert!(iter_right.peek().is_none());
+                tmp.push(iter_left.next().cloned().unwrap());
             }
         }
         }
 
         // Copy content of "tmp" back into "input" vector.
         assert_eq!(tmp.len(), n);
-        // for k in 0..n {
-        //     input[k] = tmp[k].clone();
-        //     // unsafe {
-        //     //     input[k] = tmp.get_unchecked(k).clone();
-        //     // }
-        // }
         unsafe {
             ptr::copy_nonoverlapping(tmp.as_ptr(), input.as_mut_ptr(), n);
         }
