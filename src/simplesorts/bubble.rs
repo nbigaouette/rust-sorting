@@ -38,7 +38,15 @@ use std::slice;
 /// ```
 ///
 pub fn sort<T: PartialOrd>(input: &mut [T]) {
-    unimplemented!();
+    let n = input.len();
+
+    for i in 0..n {
+        for j in 0..n-i-1 {
+            if input[j] > input[j+1] {
+                input.swap(j,j+1);
+            }
+        }
+    }
 }
 
 
