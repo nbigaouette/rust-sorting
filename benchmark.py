@@ -32,7 +32,7 @@ Nn = len(Ns)
 
 fct_ptrs = [rs.sort,
             rs.quicksort, rs.mergesort, rs.heapsort,
-            rs.insertionsort, rs.selectionsort]
+            rs.insertionsort, rs.selectionsort, rs.bubblesort]
 
 
 fct_names = [None]*len(fct_ptrs)
