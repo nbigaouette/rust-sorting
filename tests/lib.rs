@@ -231,6 +231,19 @@ fn simple_insertion_vec_f64() {
 }
 
 
+
+/// Validate against empty vector (isize).
+#[test]
+fn simple_selection_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::simplesorts::selection::sort);
+}
+
+/// Validate against empty vector (isize).
+#[test]
+fn simple_selection_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::simplesorts::selection::sort);
+}
+
 /// Validate sorting of a const vector (i8).
 #[test]
 fn simple_selection_vec_i8() {
@@ -421,6 +434,18 @@ fn simple_selection_rand_vec_f64() {
 
 
 
+
+/// Validate against empty vector (isize).
+#[test]
+fn simple_bubble_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::simplesorts::bubble::sort);
+}
+
+/// Validate against empty vector (isize).
+#[test]
+fn simple_bubble_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::simplesorts::bubble::sort);
+}
 
 /// Validate sorting of a const vector (i8).
 #[test]
@@ -644,7 +669,17 @@ fn efficient_quicksort_vec_i8() {
 
 
 
+/// Validate against empty vector (isize).
+#[test]
+fn efficient_merge_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::efficientsorts::merge::sort);
+}
 
+/// Validate against empty vector (isize).
+#[test]
+fn efficient_merge_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::efficientsorts::merge::sort);
+}
 
 /// Validate sorting of a const vector (i8).
 #[test]
@@ -838,6 +873,17 @@ fn simple_merge_rand_vec_f64() {
 
 
 
+/// Validate against empty vector (isize).
+#[test]
+fn efficient_heap_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::efficientsorts::heap::sort);
+}
+
+/// Validate against empty vector (isize).
+#[test]
+fn efficient_heap_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::efficientsorts::heap::sort);
+}
 
 /// Validate sorting of a const vector (i8).
 #[test]
