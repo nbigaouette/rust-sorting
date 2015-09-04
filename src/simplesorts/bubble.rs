@@ -30,7 +30,10 @@ use std::slice;
 ///
 /// # Optimizations
 ///
-/// None
+/// Detect if no swap occurred during the inner loop. In that case, break the outer loop. This
+/// makes the function returns as soon as the vector is sorted.
+///
+/// If the vector is initially sorted, the best case scenario of O(N) scaling is then achieved.
 ///
 /// # Notes
 ///
@@ -52,6 +55,9 @@ pub fn sort<T: PartialOrd>(input: &mut [T]) {
 
     // External loop indicates the number of elements to skip at end of vector
     for i in 0..n {
+
+        let mut swap_occured: bool = false;
+
         // Internal loop performs the comparison between elements and the next one.
         // Note that the end of iteration is the total number of elements minus "i" minus one. The
         // minus one is important as we compare element "j" with the next one "j+1".
@@ -59,7 +65,13 @@ pub fn sort<T: PartialOrd>(input: &mut [T]) {
             // If element is larger than the next one, swap them.
             if input[j] > input[j+1] {
                 input.swap(j,j+1);
+                swap_occured = true;
             }
+        }
+
+        // Optimization: if no swap occurred during this inner loop, the vector is sorted.
+        if !swap_occured {
+            break;
         }
     }
 }
