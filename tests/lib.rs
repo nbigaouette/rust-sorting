@@ -84,6 +84,211 @@ fn test_empty_vec<T: PartialOrd>(sorting_fct: fn(&mut [T])) {
 }
 
 
+// ################################################################################################
+// ################################################################################################
+// Simple sorts: Bubble sort
+
+/// Validate against empty vector (isize).
+#[test]
+fn simple_bubble_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::simplesorts::bubble::sort);
+}
+
+/// Validate against empty vector (isize).
+#[test]
+fn simple_bubble_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a const vector (i8).
+#[test]
+fn simple_bubble_vec_i8() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (i16).
+#[test]
+fn simple_bubble_vec_i16() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (i32).
+#[test]
+fn simple_bubble_vec_i32() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (i64).
+#[test]
+fn simple_bubble_vec_i64() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (u8).
+#[test]
+fn simple_bubble_vec_u8() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (u16).
+#[test]
+fn simple_bubble_vec_u16() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (u32).
+#[test]
+fn simple_bubble_vec_u32() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (u64).
+#[test]
+fn simple_bubble_vec_u64() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+
+/// Validate sorting of a const vector (f32).
+#[test]
+fn simple_bubble_vec_f32() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a const vector (f64).
+#[test]
+fn simple_bubble_vec_f64() {
+    let mut to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+
+/// Validate sorting of a random vector (i8).
+#[test]
+fn simple_bubble_rand_vec_i8() {
+    let len = 50;
+    let mut to_sort: Vec<i8> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i8>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (i16).
+#[test]
+fn simple_bubble_rand_vec_i16() {
+    let len = 50;
+    let mut to_sort: Vec<i16> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i16>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (i32).
+#[test]
+fn simple_bubble_rand_vec_i32() {
+    let len = 50;
+    let mut to_sort: Vec<i32> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i32>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (i64).
+#[test]
+fn simple_bubble_rand_vec_i64() {
+    let len = 50;
+    let mut to_sort: Vec<i64> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i64>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (u8).
+#[test]
+fn simple_bubble_rand_vec_u8() {
+    let len = 50;
+    let mut to_sort: Vec<u8> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u8>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (u16).
+#[test]
+fn simple_bubble_rand_vec_u16() {
+    let len = 50;
+    let mut to_sort: Vec<u16> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u16>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (u32).
+#[test]
+fn simple_bubble_rand_vec_u32() {
+    let len = 50;
+    let mut to_sort: Vec<u32> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u32>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (u64).
+#[test]
+fn simple_bubble_rand_vec_u64() {
+    let len = 50;
+    let mut to_sort: Vec<u64> = vec![0; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u64>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+
+/// Validate sorting of a random vector (f32).
+#[test]
+fn simple_bubble_rand_vec_f32() {
+    let len = 50;
+    let mut to_sort: Vec<f32> = vec![0.; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f32>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+/// Validate sorting of a random vector (f64).
+#[test]
+fn simple_bubble_rand_vec_f64() {
+    let len = 50;
+    let mut to_sort: Vec<f64> = vec![0.; len];
+    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
+    sorting::simplesorts::bubble::sort(&mut to_sort);
+    verify_sorted(&to_sort);
+}
+
+
+
+// ################################################################################################
+// ################################################################################################
+// Simple sorts: Insertion sort
+
 /// Validate against empty vector (i8).
 #[test]
 fn simple_insertion_empty_vec_i8() {
@@ -330,6 +535,9 @@ fn simple_insertion_sortedvec_f64() {
 }
 
 
+// ################################################################################################
+// ################################################################################################
+// Simple sorts: Selection sort
 
 /// Validate against empty vector (isize).
 #[test]
@@ -527,420 +735,209 @@ fn simple_selection_rand_vec_f64() {
 }
 
 
-
-
-
-
-
-
+// ################################################################################################
+// ################################################################################################
+// Efficient sorts: Heap sort
 
 /// Validate against empty vector (isize).
 #[test]
-fn simple_bubble_empty_vec_isize() {
-    test_empty_vec::<isize>(sorting::simplesorts::bubble::sort);
+fn efficient_heap_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::efficientsorts::heap::sort);
 }
 
 /// Validate against empty vector (isize).
 #[test]
-fn simple_bubble_empty_vec_usize() {
-    test_empty_vec::<usize>(sorting::simplesorts::bubble::sort);
+fn efficient_heap_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::efficientsorts::heap::sort);
 }
 
 /// Validate sorting of a const vector (i8).
 #[test]
-fn simple_bubble_vec_i8() {
+fn efficient_heap_vec_i8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (i16).
 #[test]
-fn simple_bubble_vec_i16() {
+fn efficient_heap_vec_i16() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (i32).
 #[test]
-fn simple_bubble_vec_i32() {
+fn efficient_heap_vec_i32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (i64).
 #[test]
-fn simple_bubble_vec_i64() {
+fn efficient_heap_vec_i64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u8).
 #[test]
-fn simple_bubble_vec_u8() {
+fn efficient_heap_vec_u8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u16).
 #[test]
-fn simple_bubble_vec_u16() {
+fn efficient_heap_vec_u16() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u32).
 #[test]
-fn simple_bubble_vec_u32() {
+fn efficient_heap_vec_u32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u64).
 #[test]
-fn simple_bubble_vec_u64() {
+fn efficient_heap_vec_u64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
 /// Validate sorting of a const vector (f32).
 #[test]
-fn simple_bubble_vec_f32() {
+fn efficient_heap_vec_f32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (f64).
 #[test]
-fn simple_bubble_vec_f64() {
+fn efficient_heap_vec_f64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
 /// Validate sorting of a random vector (i8).
 #[test]
-fn simple_bubble_rand_vec_i8() {
+fn efficient_heap_rand_vec_i8() {
     let len = 50;
     let mut to_sort: Vec<i8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i8>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (i16).
 #[test]
-fn simple_bubble_rand_vec_i16() {
+fn efficient_heap_rand_vec_i16() {
     let len = 50;
     let mut to_sort: Vec<i16> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i16>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (i32).
 #[test]
-fn simple_bubble_rand_vec_i32() {
+fn efficient_heap_rand_vec_i32() {
     let len = 50;
     let mut to_sort: Vec<i32> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i32>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (i64).
 #[test]
-fn simple_bubble_rand_vec_i64() {
+fn efficient_heap_rand_vec_i64() {
     let len = 50;
     let mut to_sort: Vec<i64> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i64>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u8).
 #[test]
-fn simple_bubble_rand_vec_u8() {
+fn efficient_heap_rand_vec_u8() {
     let len = 50;
     let mut to_sort: Vec<u8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u8>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u16).
 #[test]
-fn simple_bubble_rand_vec_u16() {
+fn efficient_heap_rand_vec_u16() {
     let len = 50;
     let mut to_sort: Vec<u16> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u16>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u32).
 #[test]
-fn simple_bubble_rand_vec_u32() {
+fn efficient_heap_rand_vec_u32() {
     let len = 50;
     let mut to_sort: Vec<u32> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u32>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u64).
 #[test]
-fn simple_bubble_rand_vec_u64() {
+fn efficient_heap_rand_vec_u64() {
     let len = 50;
     let mut to_sort: Vec<u64> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u64>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
 /// Validate sorting of a random vector (f32).
 #[test]
-fn simple_bubble_rand_vec_f32() {
+fn efficient_heap_rand_vec_f32() {
     let len = 50;
     let mut to_sort: Vec<f32> = vec![0.; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f32>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (f64).
 #[test]
-fn simple_bubble_rand_vec_f64() {
+fn efficient_heap_rand_vec_f64() {
     let len = 50;
     let mut to_sort: Vec<f64> = vec![0.; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
-    sorting::simplesorts::bubble::sort(&mut to_sort);
+    sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
-
-
-
-
-
-
-
-
-/// Validate against empty vector (isize).
-#[test]
-fn efficient_quick_empty_vec_isize() {
-    test_empty_vec::<isize>(sorting::efficientsorts::quick::sort);
-}
-
-/// Validate against empty vector (isize).
-#[test]
-fn efficient_quick_empty_vec_usize() {
-    test_empty_vec::<usize>(sorting::efficientsorts::quick::sort);
-}
-
-/// Validate sorting of a const vector (i8).
-#[test]
-fn efficient_quick_vec_i8() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (i16).
-#[test]
-fn efficient_quick_vec_i16() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (i32).
-#[test]
-fn efficient_quick_vec_i32() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (i64).
-#[test]
-fn efficient_quick_vec_i64() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (u8).
-#[test]
-fn efficient_quick_vec_u8() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (u16).
-#[test]
-fn efficient_quick_vec_u16() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (u32).
-#[test]
-fn efficient_quick_vec_u32() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (u64).
-#[test]
-fn efficient_quick_vec_u64() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-
-/// Validate sorting of a const vector (f32).
-#[test]
-fn efficient_quick_vec_f32() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a const vector (f64).
-#[test]
-fn efficient_quick_vec_f64() {
-    let mut to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-
-/// Validate sorting of a random vector (i8).
-#[test]
-fn efficient_quick_rand_vec_i8() {
-    let len = 50;
-    let mut to_sort: Vec<i8> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i8>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (i16).
-#[test]
-fn efficient_quick_rand_vec_i16() {
-    let len = 50;
-    let mut to_sort: Vec<i16> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i16>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (i32).
-#[test]
-fn efficient_quick_rand_vec_i32() {
-    let len = 50;
-    let mut to_sort: Vec<i32> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i32>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (i64).
-#[test]
-fn efficient_quick_rand_vec_i64() {
-    let len = 50;
-    let mut to_sort: Vec<i64> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i64>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (u8).
-#[test]
-fn efficient_quick_rand_vec_u8() {
-    let len = 50;
-    let mut to_sort: Vec<u8> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u8>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (u16).
-#[test]
-fn efficient_quick_rand_vec_u16() {
-    let len = 50;
-    let mut to_sort: Vec<u16> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u16>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (u32).
-#[test]
-fn efficient_quick_rand_vec_u32() {
-    let len = 50;
-    let mut to_sort: Vec<u32> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u32>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (u64).
-#[test]
-fn efficient_quick_rand_vec_u64() {
-    let len = 50;
-    let mut to_sort: Vec<u64> = vec![0; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u64>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-
-/// Validate sorting of a random vector (f32).
-#[test]
-fn efficient_quick_rand_vec_f32() {
-    let len = 50;
-    let mut to_sort: Vec<f32> = vec![0.; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f32>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-/// Validate sorting of a random vector (f64).
-#[test]
-fn efficient_quick_rand_vec_f64() {
-    let len = 50;
-    let mut to_sort: Vec<f64> = vec![0.; len];
-    to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
-    sorting::efficientsorts::quick::sort(&mut to_sort);
-    verify_sorted(&to_sort);
-}
-
-
-
-
-
-
-
-
-
+// ################################################################################################
+// ################################################################################################
+// Efficient sorts: Merge sort
 
 /// Validate against empty vector (isize).
 #[test]
@@ -1138,205 +1135,201 @@ fn simple_merge_rand_vec_f64() {
 }
 
 
-
-
-
-
-
-
-
+// ################################################################################################
+// ################################################################################################
+// Efficient sorts: Quicksort
 
 /// Validate against empty vector (isize).
 #[test]
-fn efficient_heap_empty_vec_isize() {
-    test_empty_vec::<isize>(sorting::efficientsorts::heap::sort);
+fn efficient_quick_empty_vec_isize() {
+    test_empty_vec::<isize>(sorting::efficientsorts::quick::sort);
 }
 
 /// Validate against empty vector (isize).
 #[test]
-fn efficient_heap_empty_vec_usize() {
-    test_empty_vec::<usize>(sorting::efficientsorts::heap::sort);
+fn efficient_quick_empty_vec_usize() {
+    test_empty_vec::<usize>(sorting::efficientsorts::quick::sort);
 }
 
 /// Validate sorting of a const vector (i8).
 #[test]
-fn efficient_heap_vec_i8() {
+fn efficient_quick_vec_i8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (i16).
 #[test]
-fn efficient_heap_vec_i16() {
+fn efficient_quick_vec_i16() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (i32).
 #[test]
-fn efficient_heap_vec_i32() {
+fn efficient_quick_vec_i32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (i64).
 #[test]
-fn efficient_heap_vec_i64() {
+fn efficient_quick_vec_i64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u8).
 #[test]
-fn efficient_heap_vec_u8() {
+fn efficient_quick_vec_u8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u16).
 #[test]
-fn efficient_heap_vec_u16() {
+fn efficient_quick_vec_u16() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u32).
 #[test]
-fn efficient_heap_vec_u32() {
+fn efficient_quick_vec_u32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (u64).
 #[test]
-fn efficient_heap_vec_u64() {
+fn efficient_quick_vec_u64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
 /// Validate sorting of a const vector (f32).
 #[test]
-fn efficient_heap_vec_f32() {
+fn efficient_quick_vec_f32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a const vector (f64).
 #[test]
-fn efficient_heap_vec_f64() {
+fn efficient_quick_vec_f64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
 /// Validate sorting of a random vector (i8).
 #[test]
-fn efficient_heap_rand_vec_i8() {
+fn efficient_quick_rand_vec_i8() {
     let len = 50;
     let mut to_sort: Vec<i8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i8>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (i16).
 #[test]
-fn efficient_heap_rand_vec_i16() {
+fn efficient_quick_rand_vec_i16() {
     let len = 50;
     let mut to_sort: Vec<i16> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i16>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (i32).
 #[test]
-fn efficient_heap_rand_vec_i32() {
+fn efficient_quick_rand_vec_i32() {
     let len = 50;
     let mut to_sort: Vec<i32> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i32>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (i64).
 #[test]
-fn efficient_heap_rand_vec_i64() {
+fn efficient_quick_rand_vec_i64() {
     let len = 50;
     let mut to_sort: Vec<i64> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i64>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u8).
 #[test]
-fn efficient_heap_rand_vec_u8() {
+fn efficient_quick_rand_vec_u8() {
     let len = 50;
     let mut to_sort: Vec<u8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u8>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u16).
 #[test]
-fn efficient_heap_rand_vec_u16() {
+fn efficient_quick_rand_vec_u16() {
     let len = 50;
     let mut to_sort: Vec<u16> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u16>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u32).
 #[test]
-fn efficient_heap_rand_vec_u32() {
+fn efficient_quick_rand_vec_u32() {
     let len = 50;
     let mut to_sort: Vec<u32> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u32>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (u64).
 #[test]
-fn efficient_heap_rand_vec_u64() {
+fn efficient_quick_rand_vec_u64() {
     let len = 50;
     let mut to_sort: Vec<u64> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u64>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 
 /// Validate sorting of a random vector (f32).
 #[test]
-fn efficient_heap_rand_vec_f32() {
+fn efficient_quick_rand_vec_f32() {
     let len = 50;
     let mut to_sort: Vec<f32> = vec![0.; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f32>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
 
 /// Validate sorting of a random vector (f64).
 #[test]
-fn efficient_heap_rand_vec_f64() {
+fn efficient_quick_rand_vec_f64() {
     let len = 50;
     let mut to_sort: Vec<f64> = vec![0.; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
-    sorting::efficientsorts::heap::sort(&mut to_sort);
+    sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
 }
