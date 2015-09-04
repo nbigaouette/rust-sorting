@@ -887,7 +887,7 @@ fn efficient_heap_empty_vec_usize() {
 
 /// Validate sorting of a const vector (i8).
 #[test]
-fn simple_heap_vec_i8() {
+fn efficient_heap_vec_i8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I8[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -895,7 +895,7 @@ fn simple_heap_vec_i8() {
 
 /// Validate sorting of a const vector (i16).
 #[test]
-fn simple_heap_vec_i16() {
+fn efficient_heap_vec_i16() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I16[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -903,7 +903,7 @@ fn simple_heap_vec_i16() {
 
 /// Validate sorting of a const vector (i32).
 #[test]
-fn simple_heap_vec_i32() {
+fn efficient_heap_vec_i32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I32[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -911,7 +911,7 @@ fn simple_heap_vec_i32() {
 
 /// Validate sorting of a const vector (i64).
 #[test]
-fn simple_heap_vec_i64() {
+fn efficient_heap_vec_i64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_I64[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -919,7 +919,7 @@ fn simple_heap_vec_i64() {
 
 /// Validate sorting of a const vector (u8).
 #[test]
-fn simple_heap_vec_u8() {
+fn efficient_heap_vec_u8() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U8[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -927,7 +927,7 @@ fn simple_heap_vec_u8() {
 
 /// Validate sorting of a const vector (u16).
 #[test]
-fn simple_heap_vec_u16() {
+fn efficient_heap_vec_u16() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U16[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -935,7 +935,7 @@ fn simple_heap_vec_u16() {
 
 /// Validate sorting of a const vector (u32).
 #[test]
-fn simple_heap_vec_u32() {
+fn efficient_heap_vec_u32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U32[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -943,7 +943,7 @@ fn simple_heap_vec_u32() {
 
 /// Validate sorting of a const vector (u64).
 #[test]
-fn simple_heap_vec_u64() {
+fn efficient_heap_vec_u64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_U64[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -952,7 +952,7 @@ fn simple_heap_vec_u64() {
 
 /// Validate sorting of a const vector (f32).
 #[test]
-fn simple_heap_vec_f32() {
+fn efficient_heap_vec_f32() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_F32[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -960,7 +960,7 @@ fn simple_heap_vec_f32() {
 
 /// Validate sorting of a const vector (f64).
 #[test]
-fn simple_heap_vec_f64() {
+fn efficient_heap_vec_f64() {
     let mut to_sort: Vec<_> = From::from(&TO_SORT_F64[..]);
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
@@ -969,7 +969,7 @@ fn simple_heap_vec_f64() {
 
 /// Validate sorting of a random vector (i8).
 #[test]
-fn simple_heap_rand_vec_i8() {
+fn efficient_heap_rand_vec_i8() {
     let len = 50;
     let mut to_sort: Vec<i8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i8>>();
@@ -979,7 +979,7 @@ fn simple_heap_rand_vec_i8() {
 
 /// Validate sorting of a random vector (i16).
 #[test]
-fn simple_heap_rand_vec_i16() {
+fn efficient_heap_rand_vec_i16() {
     let len = 50;
     let mut to_sort: Vec<i16> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i16>>();
@@ -989,7 +989,7 @@ fn simple_heap_rand_vec_i16() {
 
 /// Validate sorting of a random vector (i32).
 #[test]
-fn simple_heap_rand_vec_i32() {
+fn efficient_heap_rand_vec_i32() {
     let len = 50;
     let mut to_sort: Vec<i32> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i32>>();
@@ -999,7 +999,7 @@ fn simple_heap_rand_vec_i32() {
 
 /// Validate sorting of a random vector (i64).
 #[test]
-fn simple_heap_rand_vec_i64() {
+fn efficient_heap_rand_vec_i64() {
     let len = 50;
     let mut to_sort: Vec<i64> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49, 51)).collect::<Vec<i64>>();
@@ -1009,7 +1009,7 @@ fn simple_heap_rand_vec_i64() {
 
 /// Validate sorting of a random vector (u8).
 #[test]
-fn simple_heap_rand_vec_u8() {
+fn efficient_heap_rand_vec_u8() {
     let len = 50;
     let mut to_sort: Vec<u8> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u8>>();
@@ -1019,7 +1019,7 @@ fn simple_heap_rand_vec_u8() {
 
 /// Validate sorting of a random vector (u16).
 #[test]
-fn simple_heap_rand_vec_u16() {
+fn efficient_heap_rand_vec_u16() {
     let len = 50;
     let mut to_sort: Vec<u16> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u16>>();
@@ -1029,7 +1029,7 @@ fn simple_heap_rand_vec_u16() {
 
 /// Validate sorting of a random vector (u32).
 #[test]
-fn simple_heap_rand_vec_u32() {
+fn efficient_heap_rand_vec_u32() {
     let len = 50;
     let mut to_sort: Vec<u32> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u32>>();
@@ -1039,7 +1039,7 @@ fn simple_heap_rand_vec_u32() {
 
 /// Validate sorting of a random vector (u64).
 #[test]
-fn simple_heap_rand_vec_u64() {
+fn efficient_heap_rand_vec_u64() {
     let len = 50;
     let mut to_sort: Vec<u64> = vec![0; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(1, 101)).collect::<Vec<u64>>();
@@ -1050,7 +1050,7 @@ fn simple_heap_rand_vec_u64() {
 
 /// Validate sorting of a random vector (f32).
 #[test]
-fn simple_heap_rand_vec_f32() {
+fn efficient_heap_rand_vec_f32() {
     let len = 50;
     let mut to_sort: Vec<f32> = vec![0.; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f32>>();
@@ -1060,7 +1060,7 @@ fn simple_heap_rand_vec_f32() {
 
 /// Validate sorting of a random vector (f64).
 #[test]
-fn simple_heap_rand_vec_f64() {
+fn efficient_heap_rand_vec_f64() {
     let len = 50;
     let mut to_sort: Vec<f64> = vec![0.; len];
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
