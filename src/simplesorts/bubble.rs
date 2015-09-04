@@ -12,22 +12,32 @@ use std::slice;
 ///
 /// # Details
 ///
-///
+/// Bubble sort will "bubble" elements from a lower poisition to their sorted position. It is
+/// a *bad* sorting algorithm but extremely simple to implement.
 ///
 /// # Scaling
 ///
+/// Two nested loops are the basis of bubble sort. The first one indicates the number of elements
+/// to skip from the end in the second loop. The second loop iterates over elements, starting at
+/// the begining of the vector and ending at the index of the outer loop.
 ///
+/// Because of these two loops, the vector is completely visited for every elements, hence the
+/// algorithm's O(N^2) scaling.
+///
+/// If the vector is already sorted, no swap will take place and this can be detected at the end
+/// of the first inner loop. As such, the best case scenario for bubble sort is O(N) when the
+/// vector is already sorted.
 ///
 /// # Optimizations
 ///
-///
+/// None
 ///
 /// # Notes
 ///
-///
-///
 /// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the
 /// compiler knows how to compare the elements and sort them.
+///
+/// Just don't use this sorting function. It's purely academic.
 ///
 /// # Examples
 ///
@@ -40,8 +50,13 @@ use std::slice;
 pub fn sort<T: PartialOrd>(input: &mut [T]) {
     let n = input.len();
 
+    // External loop indicates the number of elements to skip at end of vector
     for i in 0..n {
+        // Internal loop performs the comparison between elements and the next one.
+        // Note that the end of iteration is the total number of elements minus "i" minus one. The
+        // minus one is important as we compare element "j" with the next one "j+1".
         for j in 0..n-i-1 {
+            // If element is larger than the next one, swap them.
             if input[j] > input[j+1] {
                 input.swap(j,j+1);
             }
