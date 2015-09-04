@@ -232,6 +232,105 @@ fn simple_insertion_vec_f64() {
 
 
 
+/// Validate sorting of a const vector (i8).
+#[test]
+fn simple_insertion_sortedvec_isize() {
+    let mut to_sort: Vec<isize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<isize>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (i8).
+#[test]
+fn simple_insertion_sortedvec_usize() {
+    let mut to_sort: Vec<usize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<usize>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (i8).
+#[test]
+fn simple_insertion_sortedvec_i8() {
+    let mut to_sort: Vec<i8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i8>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (i16).
+#[test]
+fn simple_insertion_sortedvec_i16() {
+    let mut to_sort: Vec<i16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i16>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (i32).
+#[test]
+fn simple_insertion_sortedvec_i32() {
+    let mut to_sort: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i32>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (i64).
+#[test]
+fn simple_insertion_sortedvec_i64() {
+    let mut to_sort: Vec<i64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i64>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (u8).
+#[test]
+fn simple_insertion_sortedvec_u8() {
+    let mut to_sort: Vec<u8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u8>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (u16).
+#[test]
+fn simple_insertion_sortedvec_u16() {
+    let mut to_sort: Vec<u16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u16>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (u32).
+#[test]
+fn simple_insertion_sortedvec_u32() {
+    let mut to_sort: Vec<u32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u32>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting of a const vector (u64).
+#[test]
+fn simple_insertion_sortedvec_u64() {
+    let mut to_sort: Vec<u64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u64>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn simple_insertion_sortedvec_f32() {
+    let mut to_sort: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f32>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
+#[test]
+fn simple_insertion_sortedvec_f64() {
+    let mut to_sort: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f64>(&mut to_sort, sorting::simplesorts::insertion::sort);
+}
+
+
+
 /// Validate against empty vector (isize).
 #[test]
 fn simple_selection_empty_vec_isize() {
