@@ -284,6 +284,103 @@ fn simple_bubble_rand_vec_f64() {
 }
 
 
+/// Validate sorting of a sorted vector (isize).
+#[test]
+fn simple_bubble_sortedvec_isize() {
+    let mut to_sort: Vec<isize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<isize>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (usize).
+#[test]
+fn simple_bubble_sortedvec_usize() {
+    let mut to_sort: Vec<usize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<usize>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (i8).
+#[test]
+fn simple_bubble_sortedvec_i8() {
+    let mut to_sort: Vec<i8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i8>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (i16).
+#[test]
+fn simple_bubble_sortedvec_i16() {
+    let mut to_sort: Vec<i16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i16>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (i32).
+#[test]
+fn simple_bubble_sortedvec_i32() {
+    let mut to_sort: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i32>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (i64).
+#[test]
+fn simple_bubble_sortedvec_i64() {
+    let mut to_sort: Vec<i64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i64>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (u8).
+#[test]
+fn simple_bubble_sortedvec_u8() {
+    let mut to_sort: Vec<u8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u8>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (u16).
+#[test]
+fn simple_bubble_sortedvec_u16() {
+    let mut to_sort: Vec<u16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u16>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (u32).
+#[test]
+fn simple_bubble_sortedvec_u32() {
+    let mut to_sort: Vec<u32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u32>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting of a sorted vector (u64).
+#[test]
+fn simple_bubble_sortedvec_u64() {
+    let mut to_sort: Vec<u64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u64>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn simple_bubble_sortedvec_f32() {
+    let mut to_sort: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f32>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
+#[test]
+fn simple_bubble_sortedvec_f64() {
+    let mut to_sort: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f64>(&mut to_sort, sorting::simplesorts::bubble::sort);
+}
+
 
 // ################################################################################################
 // ################################################################################################
@@ -735,6 +832,104 @@ fn simple_selection_rand_vec_f64() {
 }
 
 
+/// Validate sorting of a sorted vector (isize).
+#[test]
+fn simple_selection_sortedvec_isize() {
+    let mut to_sort: Vec<isize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<isize>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (usize).
+#[test]
+fn simple_selection_sortedvec_usize() {
+    let mut to_sort: Vec<usize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<usize>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (i8).
+#[test]
+fn simple_selection_sortedvec_i8() {
+    let mut to_sort: Vec<i8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i8>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (i16).
+#[test]
+fn simple_selection_sortedvec_i16() {
+    let mut to_sort: Vec<i16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i16>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (i32).
+#[test]
+fn simple_selection_sortedvec_i32() {
+    let mut to_sort: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i32>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (i64).
+#[test]
+fn simple_selection_sortedvec_i64() {
+    let mut to_sort: Vec<i64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i64>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (u8).
+#[test]
+fn simple_selection_sortedvec_u8() {
+    let mut to_sort: Vec<u8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u8>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (u16).
+#[test]
+fn simple_selection_sortedvec_u16() {
+    let mut to_sort: Vec<u16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u16>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (u32).
+#[test]
+fn simple_selection_sortedvec_u32() {
+    let mut to_sort: Vec<u32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u32>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting of a sorted vector (u64).
+#[test]
+fn simple_selection_sortedvec_u64() {
+    let mut to_sort: Vec<u64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u64>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn simple_selection_sortedvec_f32() {
+    let mut to_sort: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f32>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
+#[test]
+fn simple_selection_sortedvec_f64() {
+    let mut to_sort: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f64>(&mut to_sort, sorting::simplesorts::selection::sort);
+}
+
+
 // ################################################################################################
 // ################################################################################################
 // Efficient sorts: Heap sort
@@ -932,6 +1127,104 @@ fn efficient_heap_rand_vec_f64() {
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
     sorting::efficientsorts::heap::sort(&mut to_sort);
     verify_sorted(&to_sort);
+}
+
+
+/// Validate sorting of a sorted vector (isize).
+#[test]
+fn efficient_heap_sortedvec_isize() {
+    let mut to_sort: Vec<isize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<isize>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (usize).
+#[test]
+fn efficient_heap_sortedvec_usize() {
+    let mut to_sort: Vec<usize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<usize>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (i8).
+#[test]
+fn efficient_heap_sortedvec_i8() {
+    let mut to_sort: Vec<i8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i8>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (i16).
+#[test]
+fn efficient_heap_sortedvec_i16() {
+    let mut to_sort: Vec<i16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i16>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (i32).
+#[test]
+fn efficient_heap_sortedvec_i32() {
+    let mut to_sort: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i32>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (i64).
+#[test]
+fn efficient_heap_sortedvec_i64() {
+    let mut to_sort: Vec<i64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i64>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (u8).
+#[test]
+fn efficient_heap_sortedvec_u8() {
+    let mut to_sort: Vec<u8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u8>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (u16).
+#[test]
+fn efficient_heap_sortedvec_u16() {
+    let mut to_sort: Vec<u16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u16>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (u32).
+#[test]
+fn efficient_heap_sortedvec_u32() {
+    let mut to_sort: Vec<u32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u32>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting of a sorted vector (u64).
+#[test]
+fn efficient_heap_sortedvec_u64() {
+    let mut to_sort: Vec<u64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u64>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn efficient_heap_sortedvec_f32() {
+    let mut to_sort: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f32>(&mut to_sort, sorting::efficientsorts::heap::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
+#[test]
+fn efficient_heap_sortedvec_f64() {
+    let mut to_sort: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f64>(&mut to_sort, sorting::efficientsorts::heap::sort);
 }
 
 
@@ -1135,6 +1428,104 @@ fn simple_merge_rand_vec_f64() {
 }
 
 
+/// Validate sorting of a sorted vector (isize).
+#[test]
+fn efficient_merge_sortedvec_isize() {
+    let mut to_sort: Vec<isize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<isize>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (usize).
+#[test]
+fn efficient_merge_sortedvec_usize() {
+    let mut to_sort: Vec<usize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<usize>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (i8).
+#[test]
+fn efficient_merge_sortedvec_i8() {
+    let mut to_sort: Vec<i8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i8>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (i16).
+#[test]
+fn efficient_merge_sortedvec_i16() {
+    let mut to_sort: Vec<i16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i16>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (i32).
+#[test]
+fn efficient_merge_sortedvec_i32() {
+    let mut to_sort: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i32>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (i64).
+#[test]
+fn efficient_merge_sortedvec_i64() {
+    let mut to_sort: Vec<i64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i64>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (u8).
+#[test]
+fn efficient_merge_sortedvec_u8() {
+    let mut to_sort: Vec<u8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u8>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (u16).
+#[test]
+fn efficient_merge_sortedvec_u16() {
+    let mut to_sort: Vec<u16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u16>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (u32).
+#[test]
+fn efficient_merge_sortedvec_u32() {
+    let mut to_sort: Vec<u32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u32>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting of a sorted vector (u64).
+#[test]
+fn efficient_merge_sortedvec_u64() {
+    let mut to_sort: Vec<u64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u64>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn efficient_merge_sortedvec_f32() {
+    let mut to_sort: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f32>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
+#[test]
+fn efficient_merge_sortedvec_f64() {
+    let mut to_sort: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f64>(&mut to_sort, sorting::efficientsorts::merge::sort);
+}
+
+
 // ################################################################################################
 // ################################################################################################
 // Efficient sorts: Quicksort
@@ -1332,4 +1723,102 @@ fn efficient_quick_rand_vec_f64() {
     to_sort = to_sort.iter().map(|_| rand::thread_rng().gen_range(-49.0, 51.0)).collect::<Vec<f64>>();
     sorting::efficientsorts::quick::sort(&mut to_sort);
     verify_sorted(&to_sort);
+}
+
+
+/// Validate sorting of a sorted vector (isize).
+#[test]
+fn efficient_quick_sortedvec_isize() {
+    let mut to_sort: Vec<isize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<isize>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (usize).
+#[test]
+fn efficient_quick_sortedvec_usize() {
+    let mut to_sort: Vec<usize> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<usize>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (i8).
+#[test]
+fn efficient_quick_sortedvec_i8() {
+    let mut to_sort: Vec<i8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i8>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (i16).
+#[test]
+fn efficient_quick_sortedvec_i16() {
+    let mut to_sort: Vec<i16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i16>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (i32).
+#[test]
+fn efficient_quick_sortedvec_i32() {
+    let mut to_sort: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i32>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (i64).
+#[test]
+fn efficient_quick_sortedvec_i64() {
+    let mut to_sort: Vec<i64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<i64>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (u8).
+#[test]
+fn efficient_quick_sortedvec_u8() {
+    let mut to_sort: Vec<u8> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u8>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (u16).
+#[test]
+fn efficient_quick_sortedvec_u16() {
+    let mut to_sort: Vec<u16> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u16>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (u32).
+#[test]
+fn efficient_quick_sortedvec_u32() {
+    let mut to_sort: Vec<u32> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u32>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting of a sorted vector (u64).
+#[test]
+fn efficient_quick_sortedvec_u64() {
+    let mut to_sort: Vec<u64> = vec![1, 2, 3, 4, 5];
+
+    test_sort_vec::<u64>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+
+/// Validate sorting a vector of single precision values (f32).
+#[test]
+fn efficient_quick_sortedvec_f32() {
+    let mut to_sort: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f32>(&mut to_sort, sorting::efficientsorts::quick::sort);
+}
+
+/// Validate sorting a vector of double precision values (f64).
+#[test]
+fn efficient_quick_sortedvec_f64() {
+    let mut to_sort: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+
+    test_sort_vec::<f64>(&mut to_sort, sorting::efficientsorts::quick::sort);
 }
