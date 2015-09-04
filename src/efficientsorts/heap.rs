@@ -41,13 +41,15 @@ use std::slice;
 pub fn sort<T: PartialOrd>(input: &mut [T]) {
     let n = input.len();
 
-    heapify(input);
+    if n > 2 {
+        heapify(input);
 
-    let mut end = n - 1;
-    while end > 0 {
-        input.swap(end, 0);
-        end -= 1;
-        sift_down(input, 0, end);
+        let mut end = n - 1;
+        while end > 0 {
+            input.swap(end, 0);
+            end -= 1;
+            sift_down(input, 0, end);
+        }
     }
 }
 
