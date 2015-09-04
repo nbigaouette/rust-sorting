@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["insertion","Insertion sort algorithm."],["selection","Selection sort algorithm."]]});
+initSidebarItems({"mod":[["bubble","Bubble sort algorithm."],["insertion","Insertion sort algorithm."],["selection","Selection sort algorithm."]]});

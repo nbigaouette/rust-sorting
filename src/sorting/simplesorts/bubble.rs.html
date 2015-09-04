@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `src/simplesorts/bubble.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
-    <title>lib.rs.html -- source</title>
+    <title>bubble.rs.html -- source</title>
 
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
     
@@ -213,183 +213,179 @@
 <span id="171">171</span>
 <span id="172">172</span>
 <span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
 </pre><pre class='rust '>
-<span class='doccomment'>//! Sorting algorithms implementations in Rust (1.2).</span>
+<span class='doccomment'>//! Bubble sort algorithm.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! # Goal</span>
+<span class='doccomment'>//! The `bubble` module contains the simple sorting algorithm &quot;Bubble Sort&quot;.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The goal of this project is purely educational and contains two aspects.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! First is to learn different canonical sorting algorithms and their implementations.</span>
-<span class='doccomment'>//! Starting on Wikipedia&#39;s</span>
-<span class='doccomment'>//! [sorting algorithms page](https://en.wikipedia.org/wiki/Sorting_algorithm)</span>
-<span class='doccomment'>//! I read the summary of some of the algorithms described here and tried to implement them without</span>
-<span class='doccomment'>//! looking at the details. I did not research any optimization on them and as such, there might be</span>
-<span class='doccomment'>//! faster (but more complicated) ways of implementing them. I did put some though in the</span>
-<span class='doccomment'>//! implementations as to have efficient and clean implementations without wasting memory.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! My second goal is to learn Rust, a new language which I find quite promising. Created at</span>
-<span class='doccomment'>//! Mozilla and developed in the open by a wonderful community, Rust has an initial goal of</span>
-<span class='doccomment'>//! creating a language to replace C++ as the language of choice for Firefox&#39;s rendering engine.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! Some of the goals of Rust are:</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! * Memory safety without garbage collection</span>
-<span class='doccomment'>//! * Concurrency without data races</span>
-<span class='doccomment'>//! * Abstraction without overhead</span>
-<span class='doccomment'>//! * Stability without stagnation</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! For more information on Rust, see:</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! * Rust homepage: https://www.rust-lang.org/</span>
-<span class='doccomment'>//! * Wikipedia: https://en.wikipedia.org/wiki/Rust_%28programming_language%29</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! The code should be well commented and simple to follow and/or expand. Unit tests are used to</span>
-<span class='doccomment'>//! validate every implementations.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! This module is greatly inspired by my C++ templated sorting library located here:</span>
-<span class='doccomment'>//! https://github.com/nbigaouette/sorting.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! # Algorithms</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! Sorting functions are encapsulated into modules. Implemented algorithms are:</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! ## Simple sorts</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! * [Insertion sort](https://en.wikipedia.org/wiki/Insertion_sort)</span>
-<span class='doccomment'>//! * [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)</span>
-<span class='doccomment'>//! * [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort)</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! ## Efficient sorts</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! * [Quicksort](https://en.wikipedia.org/wiki/Quicksort)</span>
-<span class='doccomment'>//! * [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)</span>
-<span class='doccomment'>//! * [Heapsort](https://en.wikipedia.org/wiki/Heapsort)</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! # Usage</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! # Notes</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! # Testing and validation</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! # Benchmarks</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! The library uses Rust&#39;s FFI to export the sorting functions. A Python 3 module is provided</span>
-<span class='doccomment'>//! `rust_sorting.py` that loads the library and exposes the different functions. The script</span>
-<span class='doccomment'>//! `benchmark.py` will run the algorithms with arrays of random data multiple times and plot the</span>
-<span class='doccomment'>//! timing calculations.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! To reproduce:</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! ```ignore</span>
-<span class='doccomment'>//! cargo build --release</span>
-<span class='doccomment'>//! python3 benchmark.py</span>
-<span class='doccomment'>//! ```</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! To reload data and replot (no need for previous run):</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! ```ignore</span>
-<span class='doccomment'>//! python3 benchmark.py --reload</span>
-<span class='doccomment'>//! ```</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! ![Benchmark](figures/benchmark.png &quot;Profiling of the different algorithms&quot;)</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! # License</span>
-<span class='doccomment'>//! This code is distributed under the terms of the BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License</span>
-<span class='doccomment'>//! and is Copyright 2015 Nicolas Bigaouette.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//!</span>
-
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>simplesorts</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>efficientsorts</span>;
-
-
-<span class='comment'>// Expose Rust&#39;s sort() method as if it was implemented here.</span>
-<span class='comment'>// Useful for benchmarking and comparison.</span>
+<span class='doccomment'>//! Source: https://en.wikipedia.org/wiki/Bubble_sort</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>slice</span>;
 
+<span class='doccomment'>/// Simple sort: bubble sort.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Details</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Bubble sort will &quot;bubble&quot; elements from a lower poisition to their sorted position. It is</span>
+<span class='doccomment'>/// a *bad* sorting algorithm but extremely simple to implement.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Scaling</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Two nested loops are the basis of bubble sort. The first one indicates the number of elements</span>
+<span class='doccomment'>/// to skip from the end in the second loop. The second loop iterates over elements, starting at</span>
+<span class='doccomment'>/// the begining of the vector and ending at the index of the outer loop.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Because of these two loops, the vector is completely visited for every elements, hence the</span>
+<span class='doccomment'>/// algorithm&#39;s O(N^2) scaling.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// If the vector is already sorted, no swap will take place and this can be detected at the end</span>
+<span class='doccomment'>/// of the first inner loop. As such, the best case scenario for bubble sort is O(N) when the</span>
+<span class='doccomment'>/// vector is already sorted.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Optimizations</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Detect if no swap occurred during the inner loop. In that case, break the outer loop. This</span>
+<span class='doccomment'>/// makes the function returns as soon as the vector is sorted.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// If the vector is initially sorted, the best case scenario of O(N) scaling is then achieved.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Notes</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// The type T of the vector elements to sort _must_ implement the `PartialOrd` trait so the</span>
+<span class='doccomment'>/// compiler knows how to compare the elements and sort them.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Just don&#39;t use this sorting function. It&#39;s purely academic.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// let mut data: Vec&lt;i32&gt; = vec![4, 2, 3, 1, 5];</span>
+<span class='doccomment'>/// sorting::simplesorts::bubble::sort(&amp;mut data);</span>
+<span class='doccomment'>/// assert_eq!(vec![1, 2, 3, 4, 5], data);</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>///</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sort</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialOrd</span><span class='op'>&gt;</span>(<span class='ident'>input</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>]) {
+    <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>input</span>.<span class='ident'>len</span>();
+
+    <span class='comment'>// External loop indicates the number of elements to skip at end of vector</span>
+    <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>n</span> {
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>swap_occured</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+
+        <span class='comment'>// Internal loop performs the comparison between elements and the next one.</span>
+        <span class='comment'>// Note that the end of iteration is the total number of elements minus &quot;i&quot; minus one. The</span>
+        <span class='comment'>// minus one is important as we compare element &quot;j&quot; with the next one &quot;j+1&quot;.</span>
+        <span class='kw'>for</span> <span class='ident'>j</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>n</span><span class='op'>-</span><span class='ident'>i</span><span class='op'>-</span><span class='number'>1</span> {
+            <span class='comment'>// If element is larger than the next one, swap them.</span>
+            <span class='kw'>if</span> <span class='ident'>input</span>[<span class='ident'>j</span>] <span class='op'>&gt;</span> <span class='ident'>input</span>[<span class='ident'>j</span><span class='op'>+</span><span class='number'>1</span>] {
+                <span class='ident'>input</span>.<span class='ident'>swap</span>(<span class='ident'>j</span>,<span class='ident'>j</span><span class='op'>+</span><span class='number'>1</span>);
+                <span class='ident'>swap_occured</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+            }
+        }
+
+        <span class='comment'>// Optimization: if no swap occurred during this inner loop, the vector is sorted.</span>
+        <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>swap_occured</span> {
+            <span class='kw'>break</span>;
+        }
+    }
+}
+
+
 
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_i8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_i8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int8_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>i8</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_i16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_i16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int16_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>i16</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_i32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_i32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int32_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>i32</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_i64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_i64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>int64_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>i64</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 
 
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_u8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_u8</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint8_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_u16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_u16</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint16_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u16</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_u32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_u32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint32_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u32</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_sort_u64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_u64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>uint64_t</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
         <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u64</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
     };
-    <span class='ident'>to_sort</span>.<span class='ident'>sort</span>();
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
+}
+
+<span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_f32</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
+        <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>f32</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
+    };
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
+}
+<span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>ffi_bubblesort_f64</span>(<span class='ident'>array_pointer</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>, <span class='ident'>n</span>: <span class='ident'>libc</span>::<span class='ident'>size_t</span>) {
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array_pointer</span>.<span class='ident'>is_null</span>());
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>n</span> <span class='op'>!=</span> <span class='number'>0</span>);
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>to_sort</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
+        <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='ident'>array_pointer</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>f64</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
+    };
+    <span class='ident'>sort</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>to_sort</span>);
 }
 </pre>
 </section>
@@ -435,13 +431,13 @@
     
 
     <script>
-        window.rootPath = "../../";
+        window.rootPath = "../../../";
         window.currentCrate = "sorting";
         window.playgroundUrl = "";
     </script>
-    <script src="../../jquery.js"></script>
-    <script src="../../main.js"></script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script async src="../../../search-index.js"></script>
 </body>
 </html>

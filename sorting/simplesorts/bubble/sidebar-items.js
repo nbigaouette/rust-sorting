@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["ffi_bubblesort_f32",""],["ffi_bubblesort_f64",""],["ffi_bubblesort_i16",""],["ffi_bubblesort_i32",""],["ffi_bubblesort_i64",""],["ffi_bubblesort_i8",""],["ffi_bubblesort_u16",""],["ffi_bubblesort_u32",""],["ffi_bubblesort_u64",""],["ffi_bubblesort_u8",""],["sort","Simple sort: bubble sort."]]});
