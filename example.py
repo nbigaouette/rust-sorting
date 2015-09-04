@@ -24,6 +24,7 @@ for dtype in dtypes:
     # rs.sort(array)
     # rs.insertionsort(array)
     # rs.selectionsort(array)
+    # rs.bubblesort(array)
     # rs.quicksort(array)
     # rs.mergesort(array)
     rs.heapsort(array)
